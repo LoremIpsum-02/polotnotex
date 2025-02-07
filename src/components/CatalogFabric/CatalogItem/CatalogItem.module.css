@@ -1,0 +1,107 @@
+.card{
+    background: var(--c8);
+    border-radius: 24px;
+    width: 256px;
+}
+
+.picture__container{
+    background: url('../../../assets/media/fabricCards/fabricImage.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    border-radius: 24px;
+    height: 138px;
+    padding: 15px 10px;
+
+    display: flex;
+    align-items: flex-start;
+}
+.pictureContainer__inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.availability__badge{
+    border-radius: 38px;
+    padding: 5px 14px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+.badge__available{
+    background: var(--c1);
+    color: var(--c2);
+}
+.badge__underOrder{
+    background: var(--c3);
+    color: var(--c1);
+}
+
+.popup__btn{
+    cursor: pointer;
+}
+.popup__icon{
+    width: 40px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+}
+
+.card__info{
+    padding: 15px 15px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+}
+
+.title__wrapper{
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+.title__wrapper::first-letter{
+    text-transform: uppercase;
+}
+
+.parameters__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin: 15px 0;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.parameter{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--c1);
+    gap: 10px;
+}
+.parameter__name{
+    font-weight: 600;
+    color: var(--c6);
+}
+
+.price__wrapper{
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--c6);
+}
+.price{
+    color: var(--c1);
+}
+
+.orderSample__btn{
+    color: var(--c7);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}

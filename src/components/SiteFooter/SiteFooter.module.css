@@ -1,0 +1,109 @@
+.footer{
+    background: var(--c2);
+    border-radius: 36px 36px 0 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    position: relative;
+}
+
+.decoration{
+    width: 530px;
+    height: auto;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: -30px;
+}
+
+.container{
+    width: 100%;
+    padding: 80px 10px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    width: 100%;
+    max-width: 300px;
+}
+.contacts__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+.contact__point{
+    position: relative;
+    right: -30px;
+
+    font-size: 1.125rem;
+    color: var(--text);
+    font-weight: 600;
+}
+.contact__point::before{
+    content: '';
+
+    background: url('../../assets/media/point_icon.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    aspect-ratio: 1;
+    width: 18px;
+
+    position: absolute;
+    top: 0;
+    left: -30px;
+}
+
+.picture{
+    height: auto;
+    width: 100%;
+    max-width: 600px;
+}
+
+.bottom{
+    width: 100%;
+    height: 100px;
+    background: var(--c1);
+    position: relative;
+    padding: 10px;
+}
+.logo{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: -50%;
+}
+
+@media (max-width: 992px) {
+    .footer{
+        margin-top: 200px;
+    }
+    .decoration{
+        display: none;
+    }
+
+    .contacts{
+        max-width: none;
+        padding: 0 20px;
+    }
+
+    .picture{
+        position: absolute;
+        top: -20%;
+
+        width: 350px;
+    }
+}

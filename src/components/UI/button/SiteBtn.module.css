@@ -1,0 +1,21 @@
+.btn{
+    font-size: 0.875rem;
+    background: linear-gradient(to right, #C568CA, #A941AE);
+    border-radius: 90px;
+    padding: 17px 0;
+    width: 100%;
+    color: var(--c3);
+    font-weight: 600;
+    transition: all 0.5s;
+
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn:hover{
+    transition: all 0.5s;
+    background: var(--c1);
+}

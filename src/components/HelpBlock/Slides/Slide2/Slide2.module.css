@@ -1,0 +1,54 @@
+.slide__container{
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.slider__wrapper{
+    width: 100%;
+}
+
+.inner{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+
+    width: 100%;
+    max-width: 625px;
+}
+
+.title{
+    font-family: 'Involve', sans-serif;
+    color: var(--c1);
+}
+
+.text{
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.ol{
+    list-style-position: inside;
+    margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+    .slide__container{
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .inner{
+        max-width: none;
+        text-align: left;
+    }
+
+    .slider__wrapper{
+        width: 100%;
+        padding: 0 15px;
+    }
+}

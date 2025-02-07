@@ -1,0 +1,97 @@
+.faqSection{
+    width: 100%;
+}
+
+.container{
+    width: 100%;
+    padding: 0 90px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.faq__container{
+    width: 100%;
+}
+
+.spoilers__wrapper{
+    width: 100%;
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+}
+
+/* Form */
+.form__wrapper{
+    width: 100%;
+    background: var(--c3);
+    border-radius: 65;
+    padding: 40px 30px;
+    box-shadow: var(--c2) 0 0 40px;
+}
+
+.form{
+    width: 100%;
+    margin: 25px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+.messageInput{
+    height: 130px;
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 15px 20px;
+    color: var(--c1);
+    border-radius: 30px;
+    border: 1px solid var(--c1);
+    font-weight: 600;
+    resize: vertical;
+}
+
+.btns__wrapper{
+    width: 100%;
+    margin: 25px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.socialBtn{
+    background: var(--c2);
+    border-radius: 90px;
+    width: 100%;
+    padding: 10px;
+    color: var(--text);
+    font-size: 0.875rem;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+.social__icon{
+    height: auto;
+    width: 30px;
+}
+
+@media (max-width: 992px) {
+    .container{
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .btns__wrapper{
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

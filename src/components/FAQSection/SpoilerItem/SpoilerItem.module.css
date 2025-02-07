@@ -1,0 +1,39 @@
+.spoilerItem{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.2s;
+}
+.spoilerItem *{
+    transition: all 0.2s;
+}
+
+.spoiler__title{
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--c2);
+    padding: 15px;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.spoiler__text{
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.active{
+    background: var(--c4);
+}
+.active .spoiler__icon{
+    transform: rotate(45deg);
+}

@@ -1,0 +1,132 @@
+.supportBlock{
+    position: relative;
+    padding: 50px 40px 70px;
+}
+
+.block__bg{
+    height: 435px;
+    background: url('../../assets/media/support-block/bg.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: -100;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.containerWrapper{
+    display: flex;
+    align-items: stretch;
+    gap: 40px;
+    padding: 50px;
+    border-radius: 65px;
+    box-shadow: 0 0 200px var(--c2);
+    background: #fff;
+}
+
+.text__container{
+    width: 100%;
+}
+.text__wrapper{
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.tabBtns__container{
+    width: 100%;
+    margin: 30px 0;
+    padding: 0 60px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tab__btn{
+    width: 100%;
+    text-align: center;
+    padding: 25px;
+    border-radius: 30px;
+    background: var(--c1);
+    color: var(--c3);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.tab__current{
+    color: var(--c2);
+}
+
+/* Fabric delivery section */
+.fabricDelivery__container{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+}
+
+.fabricDelivery__text{
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+.fabricDelivery__text p{
+    font-weight: 600;
+}
+
+.fabricDelivery__formWrapper{
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+}
+.form{
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Adaptive */
+@media (max-width: 992px) {
+    .supportBlock{
+        padding: 50px 0 70px;
+    }
+
+    .tabBtns__container{
+        flex-direction: column;
+        padding: 0 5px;
+    }
+
+    .containerWrapper{
+        flex-direction: column;
+        padding: 50px 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .fabricSelector__container{
+        background: none;
+        margin: 30px 0;
+    }
+
+    .fabricSelector{
+        position: static;
+        margin: 0;
+    }
+
+    .form{
+        flex-direction: column;
+    }
+}

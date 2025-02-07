@@ -1,0 +1,19 @@
+.input{
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 90px;
+    background: var(--c3);
+    color: var(--c1);
+    padding: 15px 20px;
+}
+
+.input_var2{
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 15px 20px;
+    color: var(--c1);
+    border-radius: 90px;
+    border: 1px solid var(--c1);
+    font-weight: 600;
+}

@@ -1,0 +1,118 @@
+.helpBlock{
+    width: 100%;
+    margin: 40px 0;
+    padding: 100px 40px;
+
+    position: relative;
+}
+
+.bg{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: url('../../assets/media/help-block/bg.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 252px;
+    z-index: -100;
+}
+
+.container{
+    border-radius: 32px;
+    background: var(--c2);
+    height: auto;
+    box-shadow: var(--c2) 0 0 40px;
+
+    position: relative;
+}
+
+.controls__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+    background: var(--c1);
+    padding: 25px 0;
+    border-radius: 31px;
+}
+.controlBtn{
+    color: var(--c3);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    font-weight: 600;
+    cursor: pointer;
+
+    position: relative;
+}
+.controlBtn::before{
+    content: '';
+
+    width: 24px;
+    aspect-ratio: 1;
+
+    background: url('../../assets/media/help-block/btn-arrow.png') no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    position: absolute;
+    top: -15%;
+    left: -30px;
+}
+.btn__current{
+    transition: all 0.2s;
+    color: var(--c2);
+}
+.btn__current::before{
+    background: url('../../assets/media/help-block/arrow-current.png') no-repeat;
+}
+
+.content{
+    padding: 20px 90px 70px;
+}
+
+.decoration{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: -30px;
+}
+
+/* Adaptability */
+@media (max-width: 992px) {
+    .helpBlock{
+        padding: 100px 0;
+    }
+
+    .controls__wrapper{
+        background: none;
+        padding: 40px 20px;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .controlBtn{
+        background: var(--c1);
+        border-radius: 30px;
+        padding: 10px 60px;
+        text-align: left;
+    }
+    .controlBtn::before{
+        left: 30px;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .content{
+        padding: 25px 15px 60px;
+    }
+
+    .decoration{
+        height: auto;
+        width: 340px;
+    }
+}
