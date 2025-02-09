@@ -34,8 +34,7 @@
     display: flex;
 }
 .text__wrapper{
-    /* background: var(--c1); */
-    background: red;
+    background: var(--c1);
     padding: 30px;
     text-align: left;
     width: 100%;

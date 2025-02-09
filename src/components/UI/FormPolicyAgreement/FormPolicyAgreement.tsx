@@ -10,12 +10,12 @@ export default function FormPolicyAgreement() {
 					id="policyAgreement"
 					className={styles.checkbox}
 				/>
-				<p className={styles.text}>
+				<label htmlFor="policyAgreement" className={styles.text}>
 					Нажимая на кнопку “Отправить заявку”, вы соглашаетесь с{" "}
 					<a href="#" className={styles.policy__link}>
 						политикой конфиденциальности
 					</a>
-				</p>
+				</label>
 			</div>
 		</>
 	);

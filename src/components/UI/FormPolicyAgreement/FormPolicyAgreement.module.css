@@ -9,8 +9,17 @@
 }
 
 .checkbox{
-    border: 1px solid var(--c1);
-    height: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    border: 2px solid var(--c1);
+}
+.checkbox:checked{
+    background-image: url('../../../assets/media/catalog/filter/check-mark.png');
+    background-size: 70%;
+    background-position: center;
 }
 
 .policy__link{

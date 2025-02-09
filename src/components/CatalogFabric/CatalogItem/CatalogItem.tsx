@@ -1,8 +1,14 @@
+'use client'
+
 import styles from "./CatalogItem.module.css";
 
 import Image from "next/image";
 import icon__eye from "@/assets/media/fabricCards/eye-icon.png";
-import clsx from "clsx";
+import Link from "next/link";
+import Popup from "@/components/UI/popup/Popup";
+import { useState } from "react";
+import FabricCard from "@/components/FabricCard/FabricCard";
+import OrderSample from "@/components/OrderSample/OrderSample";
 
 interface CompositionItem {
 	material: string;
@@ -13,12 +19,13 @@ interface FabricItem {
 	id: number;
 	type: string;
 	subtype: string;
-	weight: string;
+	density: string;
 	color: string;
 	composition: CompositionItem[];
 	width: number[];
 	price: string;
 	availability: string;
+	images: any;
 }
 
 interface Props {
@@ -26,75 +33,107 @@ interface Props {
 }
 
 export default function CatalogItem({ fabricItem }: Props) {
+    const [showFabricPopup, setShowFabricPopup] = useState<boolean>(false)
+    const [showOrderSample, setShowOrderSample] = useState<boolean>(false)
 	return (
 		<>
-			<div className={styles.card}>
-				<div className={styles.picture__container}>
-					<div className={styles.pictureContainer__inner}>
-						<div
-							className={
-									fabricItem.availability.toLowerCase() ==
-								"в наличии"
-									? [styles.availability__badge, styles.badge__available].join(' ')
-									: [styles.availability__badge, styles.badge__underOrder].join(' ')
-							}
-						>
-							{fabricItem.availability}
-						</div>
+            <Popup show={showFabricPopup} setShow={setShowFabricPopup}>
+                <FabricCard fabric_id={fabricItem.id} />
+            </Popup>
 
-						<button className={styles.popup__btn}>
+            <Popup show={showOrderSample} setShow={setShowOrderSample}>
+                <OrderSample fabricName={`
+                    ${fabricItem.type} ${fabricItem.subtype} ${fabricItem.density}, ${fabricItem.color}
+                `} />
+            </Popup>
+
+			<div className={styles.card}>
+				<div
+					className={styles.picture__container}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<div className={styles.pictureContainer__inner}>
+						<Link href={`/fabric-page/${fabricItem.id}`}>
 							<Image
-								src={icon__eye}
+								src={fabricItem?.images[0]}
 								alt=""
-								className={styles.popup__icon}
+								className={styles.card__image}
 							/>
-						</button>
+						</Link>
+						<div className={styles.badges__wrapper}>
+							<div
+								className={
+									fabricItem.availability.toLowerCase() ==
+									"в наличии"
+										? [
+												styles.availability__badge,
+												styles.badge__available,
+										  ].join(" ")
+										: [
+												styles.availability__badge,
+												styles.badge__underOrder,
+										  ].join(" ")
+								}
+							>
+								{fabricItem.availability}
+							</div>
+
+							<button
+								className={styles.popup__btn}
+								onClick={(e) => {
+									setShowFabricPopup(!showFabricPopup)
+								}}
+							>
+								<Image
+									src={icon__eye}
+									alt=""
+									className={styles.popup__icon}
+								/>
+							</button>
+						</div>
 					</div>
 				</div>
 
 				<div className={styles.card__info}>
-					<div className={styles.title__wrapper}>
+					<Link href={`/fabric-page/${fabricItem.id}`} className={styles.title__wrapper}>
 						{fabricItem.type} {fabricItem.subtype} <br />
-						{fabricItem.weight}
+						{fabricItem.density}
+					</Link>
+
+					<div className={styles.parameters__wrapper}>
+						<div className={styles.parameter}>
+							<p className={styles.parameter__name}>Цвет</p>
+
+							{fabricItem.color}
+						</div>
+
+						<div className={styles.parameter}>
+							<p className={styles.parameter__name}>Состав</p>
+
+							<div className={styles.composition__wrapper}>
+								{fabricItem.composition.map(
+									(item) =>
+										`${item.percents}% ${item.material}`
+								)}
+							</div>
+						</div>
+
+						<div className={styles.parameter}>
+							<p className={styles.parameter__name}>Состав</p>
+
+							{fabricItem.width.join(" - ")}
+						</div>
 					</div>
 
-                    <div className={styles.parameters__wrapper}>
-                        <div className={styles.parameter}>
-                            <p className={styles.parameter__name}>
-                                Цвет
-                            </p>
+					<div className={styles.price__wrapper}>
+						От{" "}
+						<span className={styles.price}>{fabricItem.price}</span>
+						/кг (5 п/м)
+					</div>
 
-                            {fabricItem.color}
-                        </div>
-
-                        <div className={styles.parameter}>
-                            <p className={styles.parameter__name}>
-                                Состав
-                            </p>
-
-                            <div className={styles.composition__wrapper}>
-                                {fabricItem.composition.map((item) => (
-                                    `${item.percents}% ${item.material}`
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className={styles.parameter}>
-                            <p className={styles.parameter__name}>
-                                Состав
-                            </p>
-
-                            {fabricItem.width.join(' - ')}
-                        </div>
-                    </div>
-
-                    <div className={styles.price__wrapper}>
-                        От <span className={styles.price}>{fabricItem.price}</span>/кг (5 п/м)
-                    </div>
-
-                    <a href="#" className={styles.orderSample__btn}>
-                        Заказать образец ткани
-                    </a>
+					<button className={styles.orderSample__btn} onClick={e => setShowOrderSample(!showOrderSample)}>
+						Заказать образец ткани
+					</button>
 				</div>
 			</div>
 		</>

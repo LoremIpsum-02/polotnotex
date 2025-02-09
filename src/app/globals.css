@@ -8,6 +8,10 @@
     border: none;
     background-repeat: no-repeat;
     white-space: pre-line;
+    font-family: 'Involve', sans-serif;
+    font-weight: 400;
+    user-select: none;
+    list-style: none;
 }
 
 :root{
@@ -37,7 +41,7 @@ h1{
 		calc(44px + (50 - 44) * ((100vw - 390px) / (1440 - 390))),
 		3.125rem
 	);
-    font-weight: 600;
+    font-weight: 400;
     color: var(--c1);
     font-family: 'Involve', sans-serif;
     text-transform: uppercase;

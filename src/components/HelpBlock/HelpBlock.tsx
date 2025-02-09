@@ -32,7 +32,7 @@ export default function HelpBlock() {
 		},
 	];
 
-	const [currentSlide, setCurrentSlide] = useState<number>(2);
+	const [currentSlide, setCurrentSlide] = useState<number>(3);
 
 	return (
 		<>

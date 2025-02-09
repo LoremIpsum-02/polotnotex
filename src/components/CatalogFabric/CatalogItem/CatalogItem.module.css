@@ -5,23 +5,32 @@
 }
 
 .picture__container{
-    background: url('../../../assets/media/fabricCards/fabricImage.png') no-repeat;
     background-position: center;
     background-size: cover;
     width: 100%;
     border-radius: 24px;
     height: 138px;
-    padding: 15px 10px;
-
-    display: flex;
-    align-items: flex-start;
 }
 .pictureContainer__inner{
+    width: 100%;
+
+    position: relative;
+}
+.card__image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.badges__wrapper{
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    right: 10px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    width: 100%;
 }
 
 .availability__badge{
@@ -60,7 +69,8 @@
 .title__wrapper{
     text-align: center;
     font-size: 1.125rem;
-    font-weight: 600;
+    font-weight: 400;
+    color: var(--c1);
 }
 .title__wrapper::first-letter{
     text-transform: uppercase;
@@ -104,4 +114,5 @@
     font-weight: 600;
     font-size: 0.875rem;
     margin-top: 5px;
+    cursor: pointer;
 }

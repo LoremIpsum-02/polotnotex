@@ -1,0 +1,400 @@
+.inner{
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+/* Images */
+.images__container{
+    width: 100%;
+    max-width: 580px;
+    min-width: 360px;
+}
+.currentImage__wrapper{
+    width: 100%;
+
+    position: relative;
+}
+.currentImage{
+    width: 100%;
+    height: 400px;
+    object-position: center;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.badges__wrapper{
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    right: 10px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.availability__badge{
+    border-radius: 38px;
+    padding: 5px 14px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+.badge__available{
+    background: var(--c1);
+    color: var(--c2);
+}
+.badge__underOrder{
+    background: var(--c3);
+    color: var(--c1);
+}
+
+.popup__btn{
+    cursor: pointer;
+}
+.popup__icon{
+    width: 40px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+}
+
+.images__pagination{
+    margin-top: 15px;
+    width: 100%;
+    overflow-x: scroll;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.image__btn{
+    cursor: pointer;
+}
+
+.pagination__image{
+    width: 185px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Fabric info */
+.fabricInfo__container{
+    width: 100%;
+    max-width: 670px;
+}
+
+.fabric__title{
+    font-family: 'Involve';
+    color: var(--c1);
+    text-transform: none;
+}
+
+.fabricInfo__wrapper{
+    margin-top: 20px;
+}
+
+.wrapper__inner{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.availability__title{
+    width: 100%;
+    max-width: 320px;
+    background: var(--c2);
+    border-radius: 10px;
+    padding: 7px 20px;
+    color: var(--c1);
+    text-align: left;
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.colorSelector__wrapper{
+    width: 100%;
+    position: relative;
+}
+.colorSelector__btn{
+    width: 100%;
+    background: var(--c1);
+    padding: 7px 15px;
+    border-radius: 10px;
+    color: var(--c3);
+    font-size: 1.125rem;
+    font-weight: 400;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.colors__menu{
+    width: 100%;
+    padding: 15px 20px;
+    background: var(--c8);
+    border-radius: 20px;
+    z-index: 100;
+
+    position: absolute;
+    top: 100%;
+
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+}
+.colorsMenu__item{
+    width: 100%;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu__mark{
+    width: 24px;
+    height: auto;
+    aspect-ratio: 1;
+    background-color: var(--c3);
+    border-radius: 100%;
+}
+.selected{
+    background-image: url('../../assets/media/fabric-page/mark-checked.png');
+    background-position: center;
+    background-size: 70%;
+}
+
+.colorSelector__wrapper:hover .colors__menu{
+    display: flex;
+}
+
+.details__container{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+
+    width: 100%;
+    margin: 20px 0;
+}
+.detail__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail__key{
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--c6);
+    white-space: nowrap;
+
+    display: flex;
+    flex-grow: 1;
+    align-items: baseline;
+}
+.detail__key span{
+    white-space: nowrap;
+    color: var(--c1);
+}
+.detail__key::after{
+    content: '';
+
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--c6);
+    margin-inline: 10px;
+}
+
+.detail__value{
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--c1);
+}
+.detail__value::first-letter{
+    text-transform: uppercase;
+}
+
+.buy__wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--c1);
+    white-space: nowrap;
+}
+.buyAmount__btn{
+    background: var(--c2);
+    border-radius: 900px;
+    padding: 5px 25px;
+    color: var(--c1);
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+
+.widthMenu__wrapper{
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.widthMenu__wrapper:hover .widthMenu{
+    display: flex;
+}
+
+.widthMenuWrapper__btn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: var(--c7);
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.widthMenu{
+    display: none;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 25px;
+    border-radius: 22px;
+    background: var(--c8);
+    z-index: 100;
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+}
+.width__btn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--c1);
+}
+.width__checkbox{
+    appearance: none;
+    background-color: var(--c3);
+    width: 24px;
+    aspect-ratio: 1;
+    border-radius: 12px;
+}
+.width__checkbox:checked{
+    background-image: url('../../assets/media/fabric-page/mark-checked.png');
+    background-position: center;
+    background-size: 70%;
+}
+
+.btns__wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.btns__wrapper > button{
+    width: 100%;
+    padding: 15px;
+    border-radius: 90px;
+    font-size: 0.875rem;
+    text-align: center;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.order__btn{
+    border: 2px solid var(--c1);
+    color: var(--c1);
+}
+
+.buy__btn{
+    background: var(--c1);
+    color: var(--c3);
+}
+
+.opportunities__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    margin-top: 15px;
+    background: var(--c8);
+    border-radius: 22px;
+    padding: 15px 25px;
+    width: 100%;
+}
+
+.opportunity__item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--c1);
+    font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 10px 20px;
+}
+.opportunity__item:hover{
+    background: var(--c2);
+}
+
+.description__wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+
+    margin-top: 30px;
+}
+
+.description__badge{
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--c6);
+}
+
+.description{
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text);
+}
+
+@media (max-width: 992px) {
+    .inner{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .inner > div{
+        max-width: none;
+        width: 100%;
+    }
+
+    .wrapper__inner{
+        flex-direction: column;
+    }
+    .availability__title{
+        max-width: none;
+    }
+
+    .detail__key span{
+        word-break: normal;
+        white-space: wrap;
+    }
+}

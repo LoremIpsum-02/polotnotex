@@ -1,0 +1,74 @@
+.orderSample{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    text-align: center;
+    width: 100%;
+    max-width: 770px;
+}
+
+.titles__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    width: 100%;
+}
+.title{
+    font-family: "Involve", sans-serif;
+    color: var(--c1);
+}
+.fabricName{
+    font-family: 'Involve', sans-serif;
+    color: var(--text);
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+}
+
+.inputs__wrapper{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.input__comment{
+    width: 100%;
+    font-size: 0.875rem;
+    padding: 15px 20px;
+    color: var(--c1);
+    border-radius: 20px;
+    border: 1px solid var(--c1);
+    font-weight: 400;
+    resize: vertical;
+    height: 200px;
+}
+
+.btn__wrapper{
+    max-width: 320px;
+    width: 100%;
+}
+
+.description{
+    font-family: "Involve", sans-serif;
+    color: var(--text);
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 500px) {
+    .inputs__wrapper{
+        flex-direction: column;
+    }
+}

@@ -29,7 +29,7 @@
 .form__wrapper{
     width: 100%;
     background: var(--c3);
-    border-radius: 65;
+    border-radius: 65px;
     padding: 40px 30px;
     box-shadow: var(--c2) 0 0 40px;
 }

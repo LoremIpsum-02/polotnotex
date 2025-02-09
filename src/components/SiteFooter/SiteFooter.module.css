@@ -2,6 +2,7 @@
     background: var(--c2);
     border-radius: 36px 36px 0 0;
     width: 100%;
+    margin-top: 80px;
 
     display: flex;
     flex-direction: column;

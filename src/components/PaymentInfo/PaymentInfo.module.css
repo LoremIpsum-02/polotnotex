@@ -1,0 +1,67 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+
+    text-align: left;
+    max-width: 1180px;
+    width: 100%;
+    padding: 20px;
+}
+
+.title{
+    font-family: "Involve", sans-serif;
+    color: var(--c1);
+}
+
+.text{
+    font-size: 1.125rem;
+    color: var(--text);
+    font-weight: 400;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wrapper__title{
+    font-size: 1.5rem;
+    color: var(--c1);
+}
+
+.offers__list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+.offer__item{
+    position: relative;
+    right: -30px;
+
+    font-size: 1.125rem;
+    color: var(--text);
+}
+.offer__item::before{
+    content: '';
+
+    background: url('../../assets/media/point_icon.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 30px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: -40px;
+}
+
+@media (max-width: 500px) {
+    .text{
+        text-align: center;
+    }
+}

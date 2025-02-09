@@ -46,9 +46,26 @@
 	text-align: left;
 	margin-top: 25px;
 }
-.point {
+.formPoint {
 	font-size: 0.875rem;
 	font-weight: 600;
+
+    position: relative;
+    right: -30px;
+}
+.formPoint::before{
+    content: '';
+
+    width: 24px;
+    aspect-ratio: 1;
+    background: url('../../assets/media/order-fabric/point-mark.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translate(0, -55%);
 }
 
 .text__container {

@@ -1,7 +1,7 @@
 .input{
     width: 100%;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
     border-radius: 90px;
     background: var(--c3);
     color: var(--c1);
@@ -15,5 +15,5 @@
     color: var(--c1);
     border-radius: 90px;
     border: 1px solid var(--c1);
-    font-weight: 600;
+    font-weight: 400;
 }

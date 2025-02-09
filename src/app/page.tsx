@@ -12,11 +12,13 @@ import FAQSection from "@/components/FAQSection/FAQSection";
 import OurCompanyBlock from "@/components/OurCompanyBlock/OurCompanyBlock";
 import FabricDescription from "@/components/FabricDescription/FabricDescription";
 import SupportBlock from "@/components/SupportBlock/SupportBlock";
+import SiteHeader from "@/components/SiteHeader/SiteHeader";
 
 export default function Home() {
 	
 	return (
 		<div className={styles.page}>
+            <SiteHeader />
 			<TitleBlock/>
             <FabricSelector/>
             <CatalogFabric/>
