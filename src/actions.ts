@@ -1,6 +1,20 @@
 import fabricImage1 from "@/assets/media/fabric-page/images/image1.png";
 import fabricImage2 from "@/assets/media/fabric-page/images/image2.png";
 import fabricImage3 from "@/assets/media/fabric-page/images/image3.png";
+import axios from "axios";
+
+// export async function fetchProducts() {
+//     const response = await fetch('/api/products', { cache: 'no-store' }); // Correct path for App Router
+//     if (!response.ok) throw new Error("Failed to fetch products");
+//     return response.json();
+// }
+
+export async function fetchProducts() {
+    const response = await fetch(
+        `https://polotnotex.beget.tech/wp-json/wc/v3/products?consumer_key=${process.env.NEXT_PUBLIC_WC_CONSUMER_KEY}&consumer_secret=${process.env.NEXT_PUBLIC_WC_CONSUMER_SECRET}`
+    );
+    return response
+}
 
 // Catalog data
 export function fabricList() {

@@ -1,7 +1,6 @@
 import "./globals.css";
 
 import localFont from "next/font/local";
-import SiteHeader from "@/components/SiteHeader/SiteHeader";
 import type { Metadata } from "next";
 import SiteFooter from "@/components/SiteFooter/SiteFooter";
 
@@ -43,9 +42,7 @@ export default function RootLayout({
 		>
 			<body>
 				<div className="mainContainer">
-					<main className="main">
-						{children}
-					</main>
+					<main className="main">{children}</main>
 					<SiteFooter />
 				</div>
 			</body>

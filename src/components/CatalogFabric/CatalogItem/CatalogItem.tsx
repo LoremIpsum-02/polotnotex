@@ -9,6 +9,7 @@ import Popup from "@/components/UI/popup/Popup";
 import { useState } from "react";
 import FabricCard from "@/components/FabricCard/FabricCard";
 import OrderSample from "@/components/OrderSample/OrderSample";
+import buyIcon from '@/assets/media/catalog/buy-icon.png'
 
 interface CompositionItem {
 	material: string;
@@ -134,6 +135,11 @@ export default function CatalogItem({ fabricItem }: Props) {
 					<button className={styles.orderSample__btn} onClick={e => setShowOrderSample(!showOrderSample)}>
 						Заказать образец ткани
 					</button>
+
+                    <Link href={`/fabric-page/${fabricItem.id}`} className={styles.btn__buy}>
+                        <Image src={buyIcon} alt="" />
+                        Купить
+                    </Link>
 				</div>
 			</div>
 		</>

@@ -7,10 +7,9 @@ export default function FormPolicyAgreement() {
 				<input
 					type="checkbox"
 					name="agree"
-					id="policyAgreement"
 					className={styles.checkbox}
 				/>
-				<label htmlFor="policyAgreement" className={styles.text}>
+				<label className={styles.text}>
 					Нажимая на кнопку “Отправить заявку”, вы соглашаетесь с{" "}
 					<a href="#" className={styles.policy__link}>
 						политикой конфиденциальности
