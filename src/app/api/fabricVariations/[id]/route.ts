@@ -3,9 +3,10 @@ import { NextRequest } from "next/server";
 
 export async function GET(
 	req: NextRequest,
-	{ params }: { params: { id: string | number } }
+	{ params }: { params: { id: string } }
 ) {
-	const { id } = params;
+	const id = parseInt(params.id, 10);
+
 
 	if (!id) {
 		return NextResponse.json(
