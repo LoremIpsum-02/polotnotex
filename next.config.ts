@@ -5,15 +5,16 @@ const nextConfig: NextConfig = {
 		workerThreads: false,
 		cpus: 1,
 	},
-    images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'polotnotex.beget.tech',
-        pathname: '/wp-content/uploads/**',
-      },
-    ],
-  },
+	images: {
+		remotePatterns: [
+			{
+				protocol: "http",
+				hostname: "polotnotex.beget.tech",
+				pathname: "/wp-content/uploads/**",
+			},
+		],
+	},
+    output: "standalone",
 };
 
 export default nextConfig;
