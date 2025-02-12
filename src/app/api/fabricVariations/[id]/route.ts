@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 
 export async function GET(
 	req: NextRequest,
-	{ params }: { params: { id: string } }
+	{ params }: { params: { id: string | number } }
 ) {
 	const { id } = params;
 
