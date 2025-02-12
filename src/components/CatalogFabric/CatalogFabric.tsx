@@ -64,7 +64,7 @@ export default function CatalogFabric() {
 	});
 
     async function getProducts() {
-        const response = await fabricList()
+        const response:any = await fabricList()
         setDefaultCatalogList(response)
     }
 

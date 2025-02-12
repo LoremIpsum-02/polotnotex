@@ -10,7 +10,7 @@ import { useState } from "react";
 
 export default function FabricPage() {
 	const params = useParams();
-	const fabric_id = params.id;
+	const fabric_id: any = params.id;
     const router = useRouter()
 
 	return (
