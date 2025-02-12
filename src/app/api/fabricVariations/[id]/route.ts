@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function GET(
-	request: Request,
-	{ params }: { params: { id: string | number } }
+	req: NextRequest,
+	{ params }: { params: { id: string } }
 ) {
 	const { id } = params;
 
