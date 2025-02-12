@@ -1,377 +1,54 @@
-import fabricImage1 from "@/assets/media/fabric-page/images/image1.png";
-import fabricImage2 from "@/assets/media/fabric-page/images/image2.png";
-import fabricImage3 from "@/assets/media/fabric-page/images/image3.png";
-import axios from "axios";
+export async function fetchVariations(productId: number | string) {
+	const response = await fetch(`/api/fabricVariations/${productId}`)
 
-// export async function fetchProducts() {
-//     const response = await fetch('/api/products', { cache: 'no-store' }); // Correct path for App Router
-//     if (!response.ok) throw new Error("Failed to fetch products");
-//     return response.json();
-// }
+	if (!response.ok) {
+		throw new Error("Failed to fetch variations");
+	}
 
-export async function fetchProducts() {
-    const response = await fetch(
-        `https://polotnotex.beget.tech/wp-json/wc/v3/products?consumer_key=${process.env.NEXT_PUBLIC_WC_CONSUMER_KEY}&consumer_secret=${process.env.NEXT_PUBLIC_WC_CONSUMER_SECRET}`
-    );
-    return response
+    const variations = await response.json();
+    return variations.map((variation: any) => (
+        {
+        id: variation.id,
+        color: variation.attributes.цвет || "Default",
+        images: variation.additional_images,
+    }));
 }
 
 // Catalog data
-export function fabricList() {
-	return [
-		{
-			id: 1,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [
-                fabricImage1, 
-                fabricImage2, 
-                fabricImage3,
-                fabricImage1, 
-                fabricImage2, 
-                fabricImage3,
+export async function fabricList() {
+	try {
+		const response = await fetch("/api/products");
+		if (!response.ok) throw new Error("Failed to fetch products");
 
-            ],
-            countryOrigin: 'Китай',
-            description: `Ткань флис одностороннее полотно зеленого цвета. Полимерный полиэстер. Полотно ткани коричневого флиса содержит  другие нити, это даёт преимущества, для таких как: полное отсутствие скрипучести, ткань не электризуется, не оставляет катошки, не выгорает и не выстирывается цвет. Применяется высококачественные коричневые краски. Флис быстро сохнет. Используется как подкладочная ткань для пошива 2-го слоя.`
-		},
-		{
-			id: 2,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "Под заказ",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 3,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 4,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 5,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 6,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 7,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 8,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 9,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 10,
-			type: "флис",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
+		const products = await response.json();
 
-		{
-			id: 11,
-			type: "футер",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 12,
-			type: "футер",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 13,
-			type: "футер",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 14,
-			type: "футер",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 15,
-			type: "футер",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
+		// Fetch all variations in parallel
+		const productsWithVariations = await Promise.all(
+			products.map(async (product: any) => {
+				const variations = await fetchVariations(product.id);
+				return {
+					id: product.id,
+					type: product.categories[0]?.name,
+					subtype: product.tags[0]?.name,
+					density: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'плотность')?.options,
+					colors: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'цвет')?.options,
+					composition: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'состав')?.options,
+					width: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'ширина')?.options,
+					price: `${product.price}₽`,
+					availability: product.stock_status === "instock" ? "В наличии" : "Под заказ",
+					images: product.images || [],
+					countryOrigin: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'страна-производитель')?.options,
+					description: product.description,
+					variations,
+				};
+			})
+		);
 
-		{
-			id: 16,
-			type: "Ткань для термобелья",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 17,
-			type: "Ткань для термобелья",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 18,
-			type: "Ткань для термобелья",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 19,
-			type: "Ткань для термобелья",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-		{
-			id: 20,
-			type: "Ткань для термобелья",
-			subtype: "односторонний",
-			density: "140 г/м2",
-			color: "фиалковый",
-			composition: [
-				{
-					material: "полиэстр",
-					percents: 100,
-				},
-			],
-			width: [150, 220],
-			price: "500₽",
-			availability: "В наличии",
-			images: [fabricImage1, fabricImage2, fabricImage3],
-		},
-	];
+		return productsWithVariations;
+	} catch (error) {
+		console.error("Error fetching products: ", error);
+		return []; // Return an empty array on failure
+	}
 }
 
 export function catalog_fabricDescriptions() {

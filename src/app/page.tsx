@@ -15,31 +15,23 @@ import OurCompanyBlock from "@/components/OurCompanyBlock/OurCompanyBlock";
 import FabricDescription from "@/components/FabricDescription/FabricDescription";
 import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
-import { useEffect, useState } from "react";
-import { fetchProducts } from "@/actions";
 
 export default function Home() {
-    let value = fetchProducts()
-
-	useEffect(() => {
-        console.log(value);
-    }, [])
-	
 	return (
 		<div className={styles.page}>
-            <SiteHeader />
-			<TitleBlock/>
-            <FabricSelector/>
-            <CatalogFabric/>
-            <OrderFabric/>
-            <AdvantagesSection/>
-            <PartnershipBlock/>
-            <HelpBlock/>
-            <FeaturesSection/>
-            <FAQSection/>
-            <OurCompanyBlock/>
-            <SupportBlock/>
-            <FabricDescription/>
+			<SiteHeader />
+			<TitleBlock />
+			<FabricSelector />
+			<CatalogFabric />
+			<OrderFabric />
+			<AdvantagesSection />
+			<PartnershipBlock />
+			<HelpBlock />
+			<FeaturesSection />
+			<FAQSection />
+			<OurCompanyBlock />
+			<SupportBlock />
+			<FabricDescription />
 		</div>
 	);
 }

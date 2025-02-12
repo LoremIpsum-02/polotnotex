@@ -16,10 +16,9 @@ interface FilterOption {
 }
 
 export default function CatalogFabric() {
-	const [defaultCatalogList, setDefaultCatalogList] = useState(fabricList());
+	const [defaultCatalogList, setDefaultCatalogList] = useState([]);
 	const [catalog, setCatalog] = useState([...defaultCatalogList]);
 	const [showAll, setShowAll] = useState<boolean>(true);
-
 	const filterOptionsList = [
 		{
 			name: "ВСЕ полотна",
@@ -38,7 +37,6 @@ export default function CatalogFabric() {
 			value: "Ткань для термобелья",
 		},
 	];
-
 	const fabricSubtypes = [
 		{
 			type: "футер",
@@ -49,10 +47,9 @@ export default function CatalogFabric() {
 			subtypes: ["односторонний", "двухсторонний", "Трикотаж на флисе"],
 		},
 	];
+
 	const [currentSubtypes, setCurrentSubtypes] = useState([]);
-
 	const availabilityOptions = ["В наличии", "Под заказ"];
-
 	const [filterOption, setFilterOption] = useState<FilterOption>({
 		type: "all",
 		availability: [],
@@ -66,25 +63,30 @@ export default function CatalogFabric() {
 		description: ``,
 	});
 
+    async function getProducts() {
+        const response = await fabricList()
+        setDefaultCatalogList(response)
+    }
+
 	function filterCatalog() {
 		let result = defaultCatalogList;
 
 		if (filterOption.type !== "all") {
 			result = result.filter(
-				(item) =>
-					item.type.toLowerCase() === filterOption.type.toLowerCase()
+				(item:any) =>
+					item.type.toLowerCase() == filterOption.type.toLowerCase()
 			);
 		}
 
 		if (filterOption.availability.length > 0) {
-			result = result.filter((item) =>
+			result = result.filter((item:any) =>
 				filterOption.availability.includes(item.availability)
 			);
 		}
 
 		if (filterOption.subtypes.length > 0) {
-			result = result.filter((item) =>
-				filterOption.subtypes.includes(item.subtype)
+			result = result.filter((item:any) =>
+				filterOption.subtypes.includes(item.subtype.toLowerCase())
 			);
 		}
 
@@ -95,7 +97,7 @@ export default function CatalogFabric() {
 		const result: any = [];
 
 		const val = fabricSubtypes.filter(
-			(item) => item.type == filterOption.type
+			(item) => item.type.toLowerCase() == filterOption.type.toLowerCase()
 		);
 		val.forEach((i) =>
 			i.subtypes.forEach((subtype) => result.push(subtype))
@@ -112,7 +114,6 @@ export default function CatalogFabric() {
 					item.subtype?.toLowerCase() ==
 					filterOption.subtypes[0]?.toLowerCase()
 			);
-            console.log(result);
             
 			setCurrentFabricDescription(result);
 		} 
@@ -126,6 +127,10 @@ export default function CatalogFabric() {
         }
 	}
 
+    useEffect(() => {
+        getProducts()
+    }, [])
+    
 	useEffect(() => {
 		if (
 			filterOption.type == "all" &&
@@ -138,7 +143,7 @@ export default function CatalogFabric() {
 		}
 
 		sortSubtypes();
-	}, [filterOption]);
+	}, [filterOption, defaultCatalogList]);
 
 	return (
 		<>
@@ -156,7 +161,7 @@ export default function CatalogFabric() {
 						<div className={styles.catalogList}>
 							{catalog
 								.slice(0, showAll ? catalog.length : 10) // Show only N items by default
-								.map((item) => (
+								.map((item:any) => (
 									<CatalogItem
 										fabricItem={item}
 										key={item.id}

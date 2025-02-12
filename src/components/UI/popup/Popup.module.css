@@ -21,8 +21,9 @@
     padding: 30px;
     border-radius: 34px;
 
-    max-height: 90%;
     overflow-y: scroll;
+    max-height: 90%;
+    max-width: 1440px;
 }
 
 @media (max-width: 992px) {

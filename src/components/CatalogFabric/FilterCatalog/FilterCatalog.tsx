@@ -161,19 +161,24 @@ export default function FilterCatalog({
 									: ""
 							}`}
 							key={subtype}
-                            onClick={() => {
-                                if(!filterValue.subtypes.includes(subtype)) {
-                                    setFilter((filterValue: any) => ({
-                                        ...filterValue,
-                                        subtypes: [...filterValue.subtypes, subtype]
-                                    }))
-                                } else{
-                                    setFilter((filterValue: any) => ({
-                                        ...filterValue,
-                                        subtypes: filterValue.subtypes.filter((item: string) => item != subtype)
-                                    }))
-                                }
-                            }}
+							onClick={() => {
+								if (!filterValue.subtypes.includes(subtype)) {
+									setFilter((filterValue: any) => ({
+										...filterValue,
+										subtypes: [
+											...filterValue.subtypes,
+											subtype,
+										],
+									}));
+								} else {
+									setFilter((filterValue: any) => ({
+										...filterValue,
+										subtypes: filterValue.subtypes.filter(
+											(item: string) => item != subtype
+										),
+									}));
+								}
+							}}
 						>
 							{subtype}
 						</button>

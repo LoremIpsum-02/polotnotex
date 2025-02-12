@@ -10,23 +10,19 @@ import { useState } from "react";
 import FabricCard from "@/components/FabricCard/FabricCard";
 import OrderSample from "@/components/OrderSample/OrderSample";
 import buyIcon from '@/assets/media/catalog/buy-icon.png'
-
-interface CompositionItem {
-	material: string;
-	percents: number;
-}
+import noImage from '@/assets/media/no-image.jpg'
 
 interface FabricItem {
-	id: number;
-	type: string;
-	subtype: string;
-	density: string;
-	color: string;
-	composition: CompositionItem[];
-	width: number[];
-	price: string;
-	availability: string;
-	images: any;
+	id: number | string;
+	type?: string;
+	subtype?: string;
+	density?: string;
+	colors: string[];
+	composition?: string[];
+	width?: number[];
+	price?: string;
+	availability?: string;
+	images?: any;
 }
 
 interface Props {
@@ -36,6 +32,7 @@ interface Props {
 export default function CatalogItem({ fabricItem }: Props) {
     const [showFabricPopup, setShowFabricPopup] = useState<boolean>(false)
     const [showOrderSample, setShowOrderSample] = useState<boolean>(false)
+
 	return (
 		<>
             <Popup show={showFabricPopup} setShow={setShowFabricPopup}>
@@ -44,7 +41,7 @@ export default function CatalogItem({ fabricItem }: Props) {
 
             <Popup show={showOrderSample} setShow={setShowOrderSample}>
                 <OrderSample fabricName={`
-                    ${fabricItem.type} ${fabricItem.subtype} ${fabricItem.density}, ${fabricItem.color}
+                    ${fabricItem.type} ${fabricItem.subtype} ${fabricItem.density}, ${fabricItem.colors[0]}
                 `} />
             </Popup>
 
@@ -56,15 +53,20 @@ export default function CatalogItem({ fabricItem }: Props) {
 					<div className={styles.pictureContainer__inner}>
 						<Link href={`/fabric-page/${fabricItem.id}`}>
 							<Image
-								src={fabricItem?.images[0]}
+								src={fabricItem.images ?
+                                    fabricItem.images[0].src
+                                    : noImage
+                                }
 								alt=""
 								className={styles.card__image}
+                                width={1000}
+                                height={1000}
 							/>
 						</Link>
 						<div className={styles.badges__wrapper}>
 							<div
 								className={
-									fabricItem.availability.toLowerCase() ==
+									fabricItem.availability?.toLowerCase() ==
 									"в наличии"
 										? [
 												styles.availability__badge,
@@ -105,24 +107,23 @@ export default function CatalogItem({ fabricItem }: Props) {
 						<div className={styles.parameter}>
 							<p className={styles.parameter__name}>Цвет</p>
 
-							{fabricItem.color}
+							{fabricItem.colors[0]}
 						</div>
 
 						<div className={styles.parameter}>
 							<p className={styles.parameter__name}>Состав</p>
 
 							<div className={styles.composition__wrapper}>
-								{fabricItem.composition.map(
-									(item) =>
-										`${item.percents}% ${item.material}`
-								)}
+								{fabricItem.composition?.map(item => (
+                                        <span key={item}>{item}<br /></span>
+                                ))}
 							</div>
 						</div>
 
 						<div className={styles.parameter}>
-							<p className={styles.parameter__name}>Состав</p>
+							<p className={styles.parameter__name}>Ширина</p>
 
-							{fabricItem.width.join(" - ")}
+							{fabricItem.width?.join(" - ")}
 						</div>
 					</div>
 
