@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./page.module.css";
 
@@ -15,23 +15,130 @@ import OurCompanyBlock from "@/components/OurCompanyBlock/OurCompanyBlock";
 import FabricDescription from "@/components/FabricDescription/FabricDescription";
 import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
+import { RefObject, useEffect, useRef, useState } from "react";
+import SiteFooter from "@/components/SiteFooter/SiteFooter";
 
 export default function Home() {
+	const [preselectedFilter, setPreselectedFilter] = useState({
+		type: "all",
+		subtypes: [],
+		availability: [],
+	});
+	const [helpBlockSlider, setHelpBlockSlider] = useState<number>(3);
+	const [supportSlide, setSupportSlide] = useState<number>(0);
+
+	const productsRef = useRef<any>(null);
+
+	const helpSectionRef = useRef<any>(null);
+	const orderFabricRef = useRef<any>(null);
+	const supportRef = useRef<any>(null);
+	const faqRef = useRef<any>(null);
+	const contactsRef = useRef<any>(null);
+
+	const headerInfoMenu = [
+		{
+			name: "С чего начать",
+			elementRef: helpSectionRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+				});
+				setHelpBlockSlider(0);
+			},
+		},
+		{
+			name: "Оптовый отдел",
+			elementRef: orderFabricRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+                    block: 'center',
+				});
+			},
+		},
+		{
+			name: "Бронь и закупка",
+			elementRef: orderFabricRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+                    block: 'center',
+				});
+			},
+		},
+		{
+			name: "Поддержка",
+			elementRef: supportRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+				});
+			},
+		},
+		{
+			name: "Возможности",
+			elementRef: supportRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+				});
+				setSupportSlide(1);
+			},
+		},
+		{
+			name: "Вопросы FAQ",
+			elementRef: faqRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+				});
+			},
+		},
+		{
+			name: "Контакты",
+			elementRef: contactsRef,
+			handleClick: function () {
+				this.elementRef.current?.scrollIntoView({
+					behavior: "smooth",
+				});
+			},
+		},
+	];
+
 	return (
 		<div className={styles.page}>
-			<SiteHeader />
+			<SiteHeader
+				selectFabric={setPreselectedFilter}
+				productsRef={productsRef}
+				menu__info={headerInfoMenu}
+			/>
 			<TitleBlock />
-			<FabricSelector />
-			<CatalogFabric />
-			<OrderFabric />
+			<FabricSelector
+				selectFabric={setPreselectedFilter}
+				productsRef={productsRef}
+			/>
+			<CatalogFabric
+				preselectedFabric={preselectedFilter}
+				productsRef={productsRef}
+			/>
+			<OrderFabric targetRef={orderFabricRef} />
 			<AdvantagesSection />
 			<PartnershipBlock />
-			<HelpBlock />
+			<HelpBlock
+				targetRef={helpSectionRef}
+				currentSlide={helpBlockSlider}
+				setCurrentSlide={setHelpBlockSlider}
+			/>
 			<FeaturesSection />
-			<FAQSection />
+			<FAQSection targetRef={faqRef} />
 			<OurCompanyBlock />
-			<SupportBlock />
+			<SupportBlock
+				targetRef={supportRef}
+				currentSlide={supportSlide}
+				setCurrentSlide={setSupportSlide}
+			/>
 			<FabricDescription />
+			<SiteFooter targetRef={contactsRef} />
 		</div>
 	);
 }

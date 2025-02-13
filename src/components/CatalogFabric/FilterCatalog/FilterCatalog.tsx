@@ -7,6 +7,7 @@ import icon_wa from "@/assets/media/header/socials/whatsapp.png";
 import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
 import title__arrowIcon from "@/assets/media/fabricCards/title-arrow.png";
+import { useEffect, useState } from "react";
 
 interface FilterOption {
 	name: string;
@@ -56,7 +57,7 @@ export default function FilterCatalog({
 										type="radio"
 										name="filterOption"
 										id={option.value}
-										defaultChecked={option.value == "all"}
+										checked={option.value.toLowerCase() == filterValue.type.toLowerCase()}
 										className={styles.filter__checkbox}
 										onChange={() => {
 											setFilter({

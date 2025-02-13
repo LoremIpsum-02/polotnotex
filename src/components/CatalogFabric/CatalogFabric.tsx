@@ -2,7 +2,7 @@
 
 import styles from "./CatalogFabric.module.css";
 
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import FilterCatalog from "./FilterCatalog/FilterCatalog";
 import { catalog_fabricDescriptions, fabricList } from "@/actions";
 import CatalogItem from "./CatalogItem/CatalogItem";
@@ -15,7 +15,15 @@ interface FilterOption {
 	subtypes: string[];
 }
 
-export default function CatalogFabric() {
+interface Props {
+	preselectedFabric: FilterOption;
+	productsRef: RefObject<HTMLDivElement>;
+}
+
+export default function CatalogFabric({
+	preselectedFabric,
+	productsRef,
+}: Props) {
 	const [defaultCatalogList, setDefaultCatalogList] = useState([]);
 	const [catalog, setCatalog] = useState([...defaultCatalogList]);
 	const [showAll, setShowAll] = useState<boolean>(true);
@@ -50,11 +58,8 @@ export default function CatalogFabric() {
 
 	const [currentSubtypes, setCurrentSubtypes] = useState([]);
 	const availabilityOptions = ["В наличии", "Под заказ"];
-	const [filterOption, setFilterOption] = useState<FilterOption>({
-		type: "all",
-		availability: [],
-		subtypes: [],
-	});
+	const [filterOption, setFilterOption] =
+		useState<FilterOption>(preselectedFabric);
 
 	const fabricDescriptions = catalog_fabricDescriptions();
 	const [currentFabricDescription, setCurrentFabricDescription] = useState({
@@ -63,29 +68,30 @@ export default function CatalogFabric() {
 		description: ``,
 	});
 
-    async function getProducts() {
-        const response:any = await fabricList()
-        setDefaultCatalogList(response)
-    }
+	// Functions
+	async function getProducts() {
+		const response: any = await fabricList();
+		setDefaultCatalogList(response);
+	}
 
 	function filterCatalog() {
 		let result = defaultCatalogList;
 
 		if (filterOption.type !== "all") {
 			result = result.filter(
-				(item:any) =>
+				(item: any) =>
 					item.type.toLowerCase() == filterOption.type.toLowerCase()
 			);
 		}
 
 		if (filterOption.availability.length > 0) {
-			result = result.filter((item:any) =>
+			result = result.filter((item: any) =>
 				filterOption.availability.includes(item.availability)
 			);
 		}
 
 		if (filterOption.subtypes.length > 0) {
-			result = result.filter((item:any) =>
+			result = result.filter((item: any) =>
 				filterOption.subtypes.includes(item.subtype.toLowerCase())
 			);
 		}
@@ -114,23 +120,21 @@ export default function CatalogFabric() {
 					item.subtype?.toLowerCase() ==
 					filterOption.subtypes[0]?.toLowerCase()
 			);
-            
+
 			setCurrentFabricDescription(result);
-		} 
-        else {
-            let result: any = listAll.find(
+		} else {
+			let result: any = listAll.find(
 				(item) =>
-					item.type?.toLowerCase() ==
-					filterOption.type.toLowerCase()
+					item.type?.toLowerCase() == filterOption.type.toLowerCase()
 			);
 			setCurrentFabricDescription(result);
-        }
+		}
 	}
 
-    useEffect(() => {
-        getProducts()
-    }, [])
-    
+	useEffect(() => {
+		getProducts();
+	}, []);
+
 	useEffect(() => {
 		if (
 			filterOption.type == "all" &&
@@ -145,9 +149,14 @@ export default function CatalogFabric() {
 		sortSubtypes();
 	}, [filterOption, defaultCatalogList]);
 
+	useEffect(() => {
+		setFilterOption(preselectedFabric);
+		// console.log(filterOption)
+	}, [preselectedFabric]);
+
 	return (
 		<>
-			<div className={styles.catalogFabric}>
+			<div className={styles.catalogFabric} ref={productsRef}>
 				<FilterCatalog
 					filterValue={filterOption}
 					filterOptions={filterOptionsList}
@@ -161,7 +170,7 @@ export default function CatalogFabric() {
 						<div className={styles.catalogList}>
 							{catalog
 								.slice(0, showAll ? catalog.length : 10) // Show only N items by default
-								.map((item:any) => (
+								.map((item: any) => (
 									<CatalogItem
 										fabricItem={item}
 										key={item.id}

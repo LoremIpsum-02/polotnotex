@@ -7,6 +7,7 @@ import backIcon from "@/assets/media/fabric-page/back-arrow.png";
 import FabricCard from "@/components/FabricCard/FabricCard";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import SiteFooter from "@/components/SiteFooter/SiteFooter";
 
 export default function FabricPage() {
 	const params = useParams();
@@ -27,6 +28,8 @@ export default function FabricPage() {
     				<FabricCard fabric_id={fabric_id} />
     			</main>
 			</div>
+
+            <SiteFooter />
 		</>
 	);
 }

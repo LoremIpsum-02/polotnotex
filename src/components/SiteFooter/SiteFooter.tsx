@@ -4,11 +4,16 @@ import Image from "next/image";
 import picture from '@/assets/media/footer/picture.png'
 import logo from '@/assets/media/logo/logo_header.png'
 import decoration from '@/assets/media/decoration.png'
+import { RefObject } from "react";
 
-export default function SiteFooter() {
+interface Props{
+    targetRef?: RefObject<HTMLDivElement>;
+}
+
+export default function SiteFooter({targetRef}: Props) {
 	return (
 		<>
-			<footer className={styles.footer}>
+			<footer className={styles.footer} ref={targetRef}>
                 <Image src={decoration} alt="" className={styles.decoration} />
 				<div className={styles.container}>
 					<div className={styles.contacts}>

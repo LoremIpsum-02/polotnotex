@@ -1,8 +1,8 @@
 'use client'
 
-import React from "react";
 import styles from "./SiteHeader.module.css";
 
+import React, { RefObject } from "react";
 import Image from "next/image";
 import Logo from "@/assets/media/logo/logo_header.png";
 import phoneIcon from "@/assets/media/header/phone_icon.png";
@@ -10,24 +10,44 @@ import icon_wa from "@/assets/media/header/socials/whatsapp.png";
 import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
 
-export default function SiteHeader() {
-	const menu__fabricCatalog = [
-		"Флис двухсторонний",
-		"Флис односторонний",
-		"Трикотаж на флисе",
-		"Футер двух нитка",
-		"Футер трёх нитка",
-		"Ткань для термобелья",
-	];
+interface Props {
+	selectFabric: (arg: any) => void;
+    productsRef: RefObject<HTMLDivElement>,
+    menu__info: any,
+}
 
-	const menu__info = [
-		"С чего начать",
-		"Оптовый отдел",
-		"Бронь и закупка",
-		"Поддержка",
-		"Возможности",
-		"Вопросы FAQ",
-		"Контакты",
+export default function SiteHeader({ selectFabric, productsRef, menu__info }: Props) {
+	const menu__fabricCatalog = [
+		{
+            type: "Флис",
+            subtypes: ["односторонний"],
+            availability: [],
+        },
+        {
+            type: "Флис",
+            subtypes: ["двухсторонний"],
+            availability: [],
+        },
+        {
+            type: "Флис",
+            subtypes: ["Трикотаж на флисе"],
+            availability: [],
+        },
+		{
+            type: "Футер",
+            subtypes: ["2-х нитка"],
+            availability: [],
+        },
+        {
+            type: "Футер",
+            subtypes: ["3-х нитка"],
+            availability: [],
+        },
+		{
+            type: "Ткань для термобелья",
+            subtypes: [],
+            availability: [],
+        },
 	];
 
 	return (
@@ -84,14 +104,17 @@ export default function SiteHeader() {
 												styles.fabricCatalog__menu,
 											].join(" ")}
 										>
-											{menu__fabricCatalog.map((item) => (
-												<a
-													href="#"
+											{menu__fabricCatalog.map((item, index) => (
+												<button
 													className={styles.menuItem}
-													key={item}
+													key={index}
+                                                    onClick={() => {
+                                                        selectFabric(item)
+                                                        productsRef.current?.scrollIntoView({ behavior: "smooth" });
+                                                    }}
 												>
-													{item}
-												</a>
+													{item.type}{' '}{item.subtypes}
+												</button>
 											))}
 										</div>
 									</div>
@@ -113,14 +136,14 @@ export default function SiteHeader() {
 												styles.info__menu,
 											].join(" ")}
 										>
-											{menu__info.map((item) => (
-												<a
-													href="#"
+											{menu__info.map((item: any) => (
+												<button
 													className={styles.menuItem}
-													key={item}
+													key={item.name}
+                                                    onClick={() => item.handleClick()}
 												>
-													{item}
-												</a>
+													{item.name}
+												</button>
 											))}
 										</div>
 									</div>

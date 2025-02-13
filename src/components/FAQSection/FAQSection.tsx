@@ -9,10 +9,14 @@ import SiteInput from "../UI/input/SiteInput";
 
 import icon__wa from "@/assets/media/social-media/whatsapp.png";
 import icon__tg from "@/assets/media/social-media/telegram.png";
-import { useState } from "react";
+import { RefObject, useState } from "react";
 import SpoilerItem from "./SpoilerItem/SpoilerItem";
 
-export default function FAQSection() {
+interface Props{
+    targetRef: RefObject<HTMLDivElement>;
+}
+
+export default function FAQSection({targetRef}: Props) {
 	const spoilersData = [
 		{
 			id: 1,
@@ -73,7 +77,7 @@ export default function FAQSection() {
 
 	return (
 		<>
-			<div className={styles.faqSection}>
+			<div className={styles.faqSection} ref={targetRef}>
 				<div className={styles.container}>
 					<div className={styles.faq__container}>
 						<h2>ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ ПРИ ПОКУПКЕ ТКАНИ</h2>

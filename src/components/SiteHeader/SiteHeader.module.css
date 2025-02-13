@@ -152,12 +152,13 @@
 }
 
 .headerMenu{
-    z-index: 100;
-    border-radius: 10px;
+    position: absolute;
     top: 100%;
 
-    position: absolute;
+    z-index: 100;
+    border-radius: 10px;
     width: 100%;
+    box-shadow: 0 0 20px #000;
 
     display: none;
     flex-direction: column;
@@ -172,6 +173,7 @@
     border-radius: 5px;
     width: 100%;
     font-size: 0.875rem;
+    text-align: left;
 }
 .menuItem:hover{
     transition: all 0.2s;

@@ -2,7 +2,7 @@
 
 import styles from "./SupportBlock.module.css";
 
-import { useState } from "react";
+import { RefObject } from "react";
 import FormPolicyAgreement from "@/components/UI/FormPolicyAgreement/FormPolicyAgreement";
 import SiteBtn from "@/components/UI/button/SiteBtn";
 import SiteInput from "@/components/UI/input/SiteInput";
@@ -10,7 +10,13 @@ import btnIcon from '@/assets/media/btn-arrow.png'
 import btn__current from '@/assets/media/arrow-current.png'
 import Image from "next/image";
 
-export default function SupportBlock() {
+interface Props{
+    currentSlide: number,
+    setCurrentSlide: (num: number) => void
+    targetRef: RefObject<HTMLDivElement>;
+}
+
+export default function SupportBlock({currentSlide, setCurrentSlide, targetRef}: Props) {
 	const textSlides = [
 		{
 			title: "ПОДДЕРЖКА",
@@ -52,11 +58,9 @@ export default function SupportBlock() {
 		},
 	];
 
-	const [currentSlide, setCurrentSlide] = useState(0);
-
 	return (
 		<>
-			<div className={styles.supportBlock}>
+			<div className={styles.supportBlock} ref={targetRef}>
 				<div className={styles.tabBtns__container}>
 					{textSlides.map((item, index) => (
 						<button

@@ -2,14 +2,18 @@
 
 import styles from "./OrderFabric.module.css";
 
-import { useState } from "react";
+import { RefObject, useState } from "react";
 import SiteInput from "../UI/input/SiteInput";
 import SiteBtn from "../UI/button/SiteBtn";
 import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
 import Image from "next/image";
 import decoration from "@/assets/media/order-fabric/form-decoration.png";
 
-export default function OrderFabric() {
+interface Props {
+    targetRef: RefObject<HTMLDivElement>;
+}
+
+export default function OrderFabric({targetRef}: Props) {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -18,7 +22,7 @@ export default function OrderFabric() {
 
 	return (
 		<>
-			<div className={styles.orderFabric}>
+			<div className={styles.orderFabric} ref={targetRef}>
 				<div className={styles.block}>
 					<h2>заказать ткань оптом со склада или забронировать</h2>
 

@@ -1,28 +1,63 @@
 import styles from "./FabricSelector.module.css";
 
-import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
-import SiteInput from "../UI/input/SiteInput";
+import FormPolicyAgreement from "@/components/UI/FormPolicyAgreement/FormPolicyAgreement";
+import SiteInput from "@/components/UI/input/SiteInput";
 import icon__arrow from "@/assets/media/fabric-selector/arrow.png";
 import Image from "next/image";
-import SiteBtn from "../UI/button/SiteBtn";
+import SiteBtn from "@/components/UI/button/SiteBtn";
+import { RefObject } from "react";
 
-export default function FabricSelector() {
+interface Props {
+	selectFabric: (arg: any) => void;
+	productsRef: RefObject<HTMLDivElement>;
+}
+
+export default function FabricSelector({ selectFabric, productsRef }: Props) {
 	const lists = [
 		{
 			title: "Выбрать ткань флис",
 			pointsList: [
-				"Флис односторонний",
-				"Флис двухсторонний",
-				"Трикотаж на флисе",
+				{
+					type: "Флис",
+					subtypes: ["односторонний"],
+					availability: [],
+				},
+				{
+					type: "Флис",
+					subtypes: ["двухсторонний"],
+					availability: [],
+				},
+				{
+					type: "Флис",
+					subtypes: ["Трикотаж на флисе"],
+					availability: [],
+				},
 			],
 		},
 		{
 			title: "Выбрать ткань футер",
-			pointsList: ["Футер 2-х нитка", "Футер 3-х нитка"],
+			pointsList: [
+				{
+					type: "Футер",
+					subtypes: ["2-х нитка"],
+					availability: [],
+				},
+				{
+					type: "Футер",
+					subtypes: ["3-х нитка"],
+					availability: [],
+				},
+			],
 		},
 		{
 			title: "Смотреть другие ткани",
-			pointsList: ["Ткань для термобелья"],
+			pointsList: [
+				{
+					type: "Ткань для термобелья",
+					subtypes: [],
+					availability: [],
+				},
+			],
 		},
 	];
 
@@ -49,15 +84,32 @@ export default function FabricSelector() {
 										</div>
 
 										<div className={styles.points__list}>
-											{list.pointsList.map((point) => (
-												<a
-													href="#"
-													className={styles.listPoint}
-													key={point}
-												>
-													{point}
-												</a>
-											))}
+											{list.pointsList.map(
+												(point, index) => (
+													<button
+														className={
+															styles.listPoint
+														}
+														key={index}
+														onClick={() => {
+															selectFabric(point);
+															productsRef.current?.scrollIntoView(
+																{
+																	behavior:
+																		"smooth",
+																}
+															);
+														}}
+													>
+														{point.subtypes.includes(
+															"Трикотаж на флисе"
+														)
+															? null
+															: point.type}{" "}
+														{point.subtypes}
+													</button>
+												)
+											)}
 										</div>
 									</div>
 								))}
