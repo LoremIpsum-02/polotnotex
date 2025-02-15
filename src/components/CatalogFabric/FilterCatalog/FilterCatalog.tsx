@@ -8,6 +8,8 @@ import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
 import title__arrowIcon from "@/assets/media/fabricCards/title-arrow.png";
 import { useEffect, useState } from "react";
+import Popup from "@/components/UI/popup/Popup";
+import OrderSample from "@/components/OrderSample/OrderSample";
 
 interface FilterOption {
 	name: string;
@@ -33,8 +35,13 @@ export default function FilterCatalog({
 	availabilityOptions,
 	subtypes,
 }: Props) {
+    const [popup, setPopup] = useState<boolean>(false)
+
 	return (
 		<>
+        <Popup show={popup} setShow={setPopup}>
+            <OrderSample />
+        </Popup>
 			<div className={styles.filter__container}>
 				<div className={styles.filter__inner}>
 					<div className={styles.filter__title}>
@@ -120,14 +127,14 @@ export default function FilterCatalog({
 
 					<div className={styles.contacts__wrapper}>
 						<a
-							href="tel:+7 989 765-65-45"
+							href="tel:+790169000907"
 							type="tel"
 							className={styles.phoneNumber}
 						>
-							+7 989 765-65-45
+							+790169000907
 						</a>
 
-						<a href="#" className={styles.social_link}>
+						<a href="https://wa.me/790169000907" className={styles.social_link}>
 							<Image
 								src={icon_wa}
 								alt="What's app"
@@ -135,7 +142,7 @@ export default function FilterCatalog({
 							/>
 						</a>
 
-						<a href="#" className={styles.social_link}>
+						<a href="https://t.me/tekstilnoyepolotno" className={styles.social_link}>
 							<Image
 								src={icon_tg}
 								alt="Telegram"
@@ -143,13 +150,13 @@ export default function FilterCatalog({
 							/>
 						</a>
 
-						<a href="#" className={styles.social_link}>
+						<button onClick={() => setPopup(true)} className={styles.social_link}>
 							<Image
 								src={icon_mail}
 								alt="Email"
 								className={styles.social_icon}
 							/>
-						</a>
+						</button>
 					</div>
 				</div>
 

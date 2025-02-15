@@ -96,7 +96,7 @@ export default function TitleBlock() {
 						</p>
 					</div>
 
-					<a href="#" className={styles.linkBtn}>
+					<a href="https://t.me/tekstilnoyepolotno" className={styles.linkBtn}>
 						Telegram-kanal
 						<Image
 							src={icon_tg}

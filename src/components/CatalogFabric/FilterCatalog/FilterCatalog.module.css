@@ -31,7 +31,7 @@
 .filterOptions__wrapper{
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -41,7 +41,7 @@
     color: var(--c3);
     font-weight: 600;
     gap: 5px;
-    font-size: 0.875rem;
+    font-size: 0.7rem;
     cursor: pointer;
 }
 .filterOption *{
@@ -65,7 +65,7 @@
 .fabricTypes__wrapper{
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 .availabilityOptions__wrapper{
     display: flex;

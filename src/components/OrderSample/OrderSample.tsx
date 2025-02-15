@@ -7,7 +7,7 @@ import SiteBtn from "@/components/UI/button/SiteBtn";
 import { useRouter } from "next/navigation";
 
 interface Props {
-	fabricName: string;
+	fabricName?: string;
 }
 
 export default function OrderSample({ fabricName }: Props) {

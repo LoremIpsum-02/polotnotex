@@ -38,7 +38,7 @@ export default function PartnershipBlock() {
 						</div>
 
 						<div className={styles.btns__wrapper}>
-							<a href="#" className={styles.socialBtn}>
+							<a href="https://wa.me/790169000907" className={styles.socialBtn}>
 								WhatsApp-chat
 								<Image
 									src={icon__wa}
@@ -47,7 +47,7 @@ export default function PartnershipBlock() {
 								/>
 							</a>
 
-							<a href="#" className={styles.socialBtn}>
+							<a href="https://t.me/tekstilnoyepolotno" className={styles.socialBtn}>
 								Telegram-kanal
 								<Image
 									src={icon__tg}

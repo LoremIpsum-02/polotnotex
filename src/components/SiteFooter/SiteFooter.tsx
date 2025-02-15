@@ -26,11 +26,11 @@ export default function SiteFooter({targetRef}: Props) {
 							</div>
 
 							<div className={styles.contact__point}>
-								Email: <a href="#">zakaz@polotnotex.ru</a>
+								Email: <a href="mailto:zakaz@polotnotex.ru">zakaz@polotnotex.ru</a>
 							</div>
 
 							<div className={styles.contact__point}>
-								Тел: <a href="tel:8 901 690-09-07">8 901 690-09-07</a>
+								Тел: <a href="tel:+790169000907">+790169000907</a>, <a href="tel:+790169000907">+790169000907</a>
 							</div>
 
 							<div className={styles.contact__point}>

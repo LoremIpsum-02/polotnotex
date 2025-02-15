@@ -2,13 +2,16 @@
 
 import styles from "./SiteHeader.module.css";
 
-import React, { RefObject } from "react";
+import React, { RefObject, useState } from "react";
 import Image from "next/image";
 import Logo from "@/assets/media/logo/logo_header.png";
 import phoneIcon from "@/assets/media/header/phone_icon.png";
 import icon_wa from "@/assets/media/header/socials/whatsapp.png";
 import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
+import Popup from "../UI/popup/Popup";
+import OrderSample from "../OrderSample/OrderSample";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	selectFabric?: (arg: any) => void;
@@ -54,8 +57,20 @@ export default function SiteHeader({
 		},
 	];
 
+	const [popup, setPopup] = useState<boolean>(false);
+
+	const router = useRouter();
+
+    function returnBack(){
+        localStorage.removeItem("thankReason")
+        router.replace("/")
+    }
+
 	return (
 		<>
+			<Popup show={popup} setShow={setPopup}>
+				<OrderSample />
+			</Popup>
 			<header className={styles.header}>
 				<div className={styles.mob__textContainer}>
 					<p className={styles.text}>
@@ -63,11 +78,11 @@ export default function SiteHeader({
 					</p>
 
 					<a
-						href="tel:+7 989 765-65-45"
+						href="tel:+790169000907"
 						type="tel"
 						className={styles.phoneNumber}
 					>
-						+7 989 765-65-45
+						+790169000907
 					</a>
 
 					<p className={styles.text}>Ткань оптом для пошива одежды</p>
@@ -77,7 +92,7 @@ export default function SiteHeader({
 						<div className={styles.header__contentWrapper}>
 							<nav className={styles.nav}>
 								<a
-									href="tel:+7 989 765-65-45"
+									href="tel:+790169000907"
 									type="tel"
 									className={styles.call_btn}
 								>
@@ -90,99 +105,123 @@ export default function SiteHeader({
 										].join(" ")}
 									/>
 								</a>
-								<div className={styles.menuBtns__wrapper}>
-									<div
-										className={`
-											${styles.catalogBtn__wrapper}
-											${styles.btnWrapper}
-                                            ${productsRef ? '' : styles.hide}
-										`}
-									>
-										<button
-											className={[
-												styles.menu_btn,
-												styles.catalog__btn,
-											].join(" ")}
-											onClick={(e) => e.preventDefault()}
-										>
-											Каталог ткани
-										</button>
-
+								{menu__info && menu__fabricCatalog ? (
+									<div className={styles.menuBtns__wrapper}>
 										<div
 											className={`
+											${styles.catalogBtn__wrapper}
+											${styles.btnWrapper}
+                                            ${productsRef ? "" : styles.hide}
+										`}
+										>
+											<button
+												className={[
+													styles.menu_btn,
+													styles.catalog__btn,
+												].join(" ")}
+												onClick={(e) =>
+													e.preventDefault()
+												}
+											>
+												Каталог ткани
+											</button>
+
+											<div
+												className={`
 												${styles.headerMenu}
 												${styles.fabricCatalog__menu}
 											`}
-										>
-											{selectFabric ? menu__fabricCatalog.map(
-												(item, index) => (
-													<button
-														className={
-															styles.menuItem
-														}
-														key={index}
-														onClick={() => {
-															selectFabric(item);
-															productsRef?.current.scrollIntoView(
-																{
-																	behavior:
-																		"smooth",
-																}
-															);
-														}}
-													>
-														{item.type}{" "}
-														{item.subtypes}
-													</button>
-												)
-											) : null}
+											>
+												{selectFabric
+													? menu__fabricCatalog.map(
+															(item, index) => (
+																<button
+																	className={
+																		styles.menuItem
+																	}
+																	key={index}
+																	onClick={() => {
+																		selectFabric(
+																			item
+																		);
+																		productsRef?.current.scrollIntoView(
+																			{
+																				behavior:
+																					"smooth",
+																			}
+																		);
+																	}}
+																>
+																	{item.type}{" "}
+																	{
+																		item.subtypes
+																	}
+																</button>
+															)
+													  )
+													: null}
+											</div>
 										</div>
-									</div>
-
-									<div
-										className={`
-											${styles.infoBtn__wrapper}
-											${styles.btnWrapper}
-                                            ${menu__info ? '' : styles.hide}
-                                        `}
-									>
-										<button
-											className={[
-												styles.menu_btn,
-												styles.info__btn,
-											].join(" ")}
-											onClick={(e) => e.preventDefault()}
-										>
-											Информация
-										</button>
 
 										<div
-											className={[
-												styles.headerMenu,
-												styles.info__menu,
-											].join(" ")}
+											className={`
+											${styles.infoBtn__wrapper}
+											${styles.btnWrapper}
+                                            ${menu__info ? "" : styles.hide}
+                                        `}
 										>
-											{menu__info ? menu__info.map((item: any) => (
-												<button
-													className={styles.menuItem}
-													key={item.name}
-													onClick={() =>
-														item.handleClick()
-													}
-												>
-													{item.name}
-												</button>
-											)) : null}
+											<button
+												className={[
+													styles.menu_btn,
+													styles.info__btn,
+												].join(" ")}
+												onClick={(e) =>
+													e.preventDefault()
+												}
+											>
+												Информация
+											</button>
+
+											<div
+												className={[
+													styles.headerMenu,
+													styles.info__menu,
+												].join(" ")}
+											>
+												{menu__info
+													? menu__info.map(
+															(item: any) => (
+																<button
+																	className={
+																		styles.menuItem
+																	}
+																	key={
+																		item.name
+																	}
+																	onClick={() =>
+																		item.handleClick()
+																	}
+																>
+																	{item.name}
+																</button>
+															)
+													  )
+													: null}
+											</div>
 										</div>
 									</div>
-								</div>
+								) : (
+									<button onClick={() => returnBack()}>
+                                        Вернуться на главную
+                                    </button>
+								)}
 
 								<a
-									href="tel:+7 989 765-65-45"
+									href="tel:+790169000907"
 									type="tel"
 									className={styles.phoneNumber}
 								>
-									+7 989 765-65-45
+									+790169000907
 								</a>
 							</nav>
 
@@ -202,7 +241,10 @@ export default function SiteHeader({
 								</p>
 
 								<div className={styles.socials_wrapper}>
-									<a href="#" className={styles.social_link}>
+									<a
+										href="https://wa.me/790169000907"
+										className={styles.social_link}
+									>
 										<Image
 											src={icon_wa}
 											alt="What's app"
@@ -213,7 +255,10 @@ export default function SiteHeader({
 										/>
 									</a>
 
-									<a href="#" className={styles.social_link}>
+									<a
+										href="https://t.me/tekstilnoyepolotno"
+										className={styles.social_link}
+									>
 										<Image
 											src={icon_tg}
 											alt="Telegram"
@@ -224,7 +269,10 @@ export default function SiteHeader({
 										/>
 									</a>
 
-									<a href="#" className={styles.social_link}>
+									<button
+										className={styles.social_link}
+										onClick={() => setPopup(true)}
+									>
 										<Image
 											src={icon_mail}
 											alt="Email"
@@ -233,13 +281,16 @@ export default function SiteHeader({
 												styles.header__icon,
 											].join(" ")}
 										/>
-									</a>
+									</button>
 								</div>
 							</div>
 						</div>
 
 						<div className={styles.mob__iconsContainer}>
-							<a href="#" className={styles.social_link}>
+							<a
+								href="https://t.me/tekstilnoyepolotno"
+								className={styles.social_link}
+							>
 								<Image
 									src={icon_tg}
 									alt="Telegram"
@@ -250,7 +301,10 @@ export default function SiteHeader({
 								/>
 							</a>
 
-							<a href="#" className={styles.social_link}>
+							<a
+								href="https://wa.me/790169000907"
+								className={styles.social_link}
+							>
 								<Image
 									src={icon_wa}
 									alt="What's app"
@@ -261,7 +315,10 @@ export default function SiteHeader({
 								/>
 							</a>
 
-							<a href="#" className={styles.social_link}>
+							<button
+								className={styles.social_link}
+								onClick={() => setPopup(true)}
+							>
 								<Image
 									src={icon_mail}
 									alt="Email"
@@ -270,10 +327,10 @@ export default function SiteHeader({
 										styles.header__icon,
 									].join(" ")}
 								/>
-							</a>
+							</button>
 
 							<a
-								href="tel:+7 989 765-65-45"
+								href="tel:+790169000907"
 								type="tel"
 								className={styles.call_btn}
 							>

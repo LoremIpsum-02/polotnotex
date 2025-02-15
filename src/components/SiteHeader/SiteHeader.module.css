@@ -57,6 +57,8 @@
 	padding: 20px 60px;
 	position: relative;
 	border-radius: 30px;
+    max-width: 1270px;
+    margin: 0 auto;
 }
 
 .nav {
@@ -107,6 +109,9 @@
 		12px
 	);
 }
+.social_link{
+    cursor: pointer;
+}
 
 /* Menus */
 .menuBtns__wrapper{
@@ -120,6 +125,7 @@
     position: relative;
     width: 100%;
     justify-content: space-between;
+    max-width: 450px;
 }
 .menu_btn {
 	position: relative;
