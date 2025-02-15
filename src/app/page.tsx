@@ -52,7 +52,7 @@ export default function Home() {
 			handleClick: function () {
 				this.elementRef.current?.scrollIntoView({
 					behavior: "smooth",
-                    block: 'center',
+					block: "center",
 				});
 			},
 		},
@@ -62,7 +62,7 @@ export default function Home() {
 			handleClick: function () {
 				this.elementRef.current?.scrollIntoView({
 					behavior: "smooth",
-                    block: 'center',
+					block: "center",
 				});
 			},
 		},
@@ -106,39 +106,41 @@ export default function Home() {
 	];
 
 	return (
-		<div className={styles.page}>
-			<SiteHeader
-				selectFabric={setPreselectedFilter}
-				productsRef={productsRef}
-				menu__info={headerInfoMenu}
-			/>
-			<TitleBlock />
-			<FabricSelector
-				selectFabric={setPreselectedFilter}
-				productsRef={productsRef}
-			/>
-			<CatalogFabric
-				preselectedFabric={preselectedFilter}
-				productsRef={productsRef}
-			/>
-			<OrderFabric targetRef={orderFabricRef} />
-			<AdvantagesSection />
-			<PartnershipBlock />
-			<HelpBlock
-				targetRef={helpSectionRef}
-				currentSlide={helpBlockSlider}
-				setCurrentSlide={setHelpBlockSlider}
-			/>
-			<FeaturesSection />
-			<FAQSection targetRef={faqRef} />
-			<OurCompanyBlock />
-			<SupportBlock
-				targetRef={supportRef}
-				currentSlide={supportSlide}
-				setCurrentSlide={setSupportSlide}
-			/>
-			<FabricDescription />
-			<SiteFooter targetRef={contactsRef} />
-		</div>
+		<>
+			<div className={styles.page}>
+				<SiteHeader
+					selectFabric={setPreselectedFilter}
+					productsRef={productsRef}
+					menu__info={headerInfoMenu}
+				/>
+				<TitleBlock />
+				<FabricSelector
+					selectFabric={setPreselectedFilter}
+					productsRef={productsRef}
+				/>
+				<CatalogFabric
+					preselectedFabric={preselectedFilter}
+					productsRef={productsRef}
+				/>
+				<OrderFabric targetRef={orderFabricRef} />
+				<AdvantagesSection />
+				<PartnershipBlock />
+				<HelpBlock
+					targetRef={helpSectionRef}
+					currentSlide={helpBlockSlider}
+					setCurrentSlide={setHelpBlockSlider}
+				/>
+				<FeaturesSection />
+				<FAQSection targetRef={faqRef} />
+				<OurCompanyBlock />
+				<SupportBlock
+					targetRef={supportRef}
+					currentSlide={supportSlide}
+					setCurrentSlide={setSupportSlide}
+				/>
+				<FabricDescription />
+				<SiteFooter targetRef={contactsRef} />
+			</div>
+		</>
 	);
 }

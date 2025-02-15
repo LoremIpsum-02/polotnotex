@@ -7,6 +7,9 @@
     color: var(--c1);
     padding: 15px 20px;
 }
+.input::placeholder{
+    color: var(--c1);
+}
 
 .input_var2{
     width: 100%;
@@ -16,4 +19,7 @@
     border-radius: 90px;
     border: 1px solid var(--c1);
     font-weight: 400;
+}
+.input_var2::placeholder{
+    color: var(--c1);
 }

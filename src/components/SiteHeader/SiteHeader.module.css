@@ -2,6 +2,9 @@
 	display: none;
 }
 
+.hide{
+    visibility: hidden;
+}
 
 .header * {
 	color: var(--c3);
@@ -42,6 +45,8 @@
 			calc(6px + (24 - 6) * ((100vw - 320px) / (1440 - 320))),
 			24px
 		);
+    position: sticky;
+    top: 0;
 }
 
 .header__contentWrapper {
@@ -49,7 +54,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px;
+	padding: 20px 60px;
 	position: relative;
 	border-radius: 30px;
 }
@@ -89,7 +94,7 @@
 }
 
 .text {
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 2;
 }
 
@@ -168,17 +173,39 @@
     background: var(--c3);
     transition: all 0.2s;
     color: var(--c1);
-    padding: 5px 20px;
+    padding: 5px 30px;
     border-bottom: 1px solid var(--c1);
     border-radius: 5px;
     width: 100%;
     font-size: 0.875rem;
     text-align: left;
+
+    position: relative;
 }
 .menuItem:hover{
     transition: all 0.2s;
     color: var(--c3);
     background: var(--c1);
+}
+.menuItem::before{
+    content: "";
+
+    background: url('../../assets/media/point_icon.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+    
+    width: 20px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.menuItem:hover::before{
+    background: url("../../assets/media/btn-arrow.png") no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .catalogBtn__wrapper:hover .fabricCatalog__menu{

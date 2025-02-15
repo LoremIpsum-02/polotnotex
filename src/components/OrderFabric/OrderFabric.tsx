@@ -8,6 +8,7 @@ import SiteBtn from "../UI/button/SiteBtn";
 import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
 import Image from "next/image";
 import decoration from "@/assets/media/order-fabric/form-decoration.png";
+import { useRouter } from "next/navigation";
 
 interface Props {
     targetRef: RefObject<HTMLDivElement>;
@@ -20,6 +21,42 @@ export default function OrderFabric({targetRef}: Props) {
 		phoneNum: "",
 	});
 
+    const router = useRouter()
+
+    async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: formData.name,
+					phone: formData.phoneNum,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				meta_data: [
+					{
+						key: "comment",
+						value: formData.email,
+					},
+				],
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+		setFormData({
+			name: "",
+			email: "",
+			phoneNum: "",
+		});
+
+        localStorage.setItem('thankReason', 'form')
+        router.push('/thank-you')
+	}
+
 	return (
 		<>
 			<div className={styles.orderFabric} ref={targetRef}>
@@ -27,7 +64,10 @@ export default function OrderFabric({targetRef}: Props) {
 					<h2>заказать ткань оптом со склада или забронировать</h2>
 
 					<div className={styles.content}>
-						<form action="#" className={styles.form}>
+						<form action="#" className={styles.form} onSubmit={(e) => {
+                            e.preventDefault()
+                            sendForm()}
+                        }>
 							<SiteInput
 								value={formData.name}
 								onChange={(e) =>
@@ -60,7 +100,7 @@ export default function OrderFabric({targetRef}: Props) {
 										phoneNum: e.target.value,
 									})
 								}
-								placeholder="Эл. почта"
+								placeholder="Тел"
 							/>
 
 							<div className={styles.points__wrapper}>

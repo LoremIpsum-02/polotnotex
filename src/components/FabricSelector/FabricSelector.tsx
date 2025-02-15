@@ -5,7 +5,8 @@ import SiteInput from "@/components/UI/input/SiteInput";
 import icon__arrow from "@/assets/media/fabric-selector/arrow.png";
 import Image from "next/image";
 import SiteBtn from "@/components/UI/button/SiteBtn";
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	selectFabric: (arg: any) => void;
@@ -60,6 +61,34 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
 			],
 		},
 	];
+
+    const [formData, setFormData] = useState({
+        tel: '',
+    })
+
+    const router = useRouter()
+
+    async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: "",
+					phone: formData.tel,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+        localStorage.setItem('thankReason', "form")
+        router.push("/thank-you")
+    }
 
 	return (
 		<>
@@ -138,8 +167,11 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
 							<div className={styles.fabricDelivery__formWrapper}>
 								<h2>бронь & консУльтациЯ</h2>
 
-								<form action="#" className={styles.form}>
-									<SiteInput var2 placeholder="Тел" />
+								<form action="#" className={styles.form} onSubmit={(e) => {
+                                    e.preventDefault()
+                                    sendForm()
+                                    }}>
+									<SiteInput var2 placeholder="Тел" value={formData.tel} onChange={e => setFormData({tel: e.target.value})} />
 									<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
 								</form>
 

@@ -2,21 +2,26 @@
 
 import styles from "./SupportBlock.module.css";
 
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
 import FormPolicyAgreement from "@/components/UI/FormPolicyAgreement/FormPolicyAgreement";
 import SiteBtn from "@/components/UI/button/SiteBtn";
 import SiteInput from "@/components/UI/input/SiteInput";
-import btnIcon from '@/assets/media/btn-arrow.png'
-import btn__current from '@/assets/media/arrow-current.png'
+import btnIcon from "@/assets/media/btn-arrow.png";
+import btn__current from "@/assets/media/arrow-current.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-interface Props{
-    currentSlide: number,
-    setCurrentSlide: (num: number) => void
-    targetRef: RefObject<HTMLDivElement>;
+interface Props {
+	currentSlide: number;
+	setCurrentSlide: (num: number) => void;
+	targetRef: RefObject<HTMLDivElement>;
 }
 
-export default function SupportBlock({currentSlide, setCurrentSlide, targetRef}: Props) {
+export default function SupportBlock({
+	currentSlide,
+	setCurrentSlide,
+	targetRef,
+}: Props) {
 	const textSlides = [
 		{
 			title: "ПОДДЕРЖКА",
@@ -58,19 +63,59 @@ export default function SupportBlock({currentSlide, setCurrentSlide, targetRef}:
 		},
 	];
 
+	const [formData, setFormData] = useState({
+		tel: "",
+	});
+
+	const router = useRouter();
+
+	async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: "",
+					phone: formData.tel,
+					email: "", // WooCommerce requires an email
+				},
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+		setFormData({
+			tel: "",
+		});
+
+		localStorage.setItem("thankReason", "form");
+		router.push("/thank-you");
+	}
+
 	return (
 		<>
 			<div className={styles.supportBlock} ref={targetRef}>
 				<div className={styles.tabBtns__container}>
 					{textSlides.map((item, index) => (
 						<button
-                            key={index}
+							key={index}
 							className={`${styles.tab__btn} ${
 								index == currentSlide ? styles.tab__current : ""
 							}`}
-                            onClick={() => setCurrentSlide(index)}
+							onClick={() => setCurrentSlide(index)}
 						>
-                            <Image src={index == currentSlide ? btn__current : btnIcon} alt="" className={styles.btnIcon} />
+							<Image
+								src={
+									index == currentSlide
+										? btn__current
+										: btnIcon
+								}
+								alt=""
+								className={styles.btnIcon}
+							/>
 							{item.title}
 						</button>
 					))}
@@ -107,8 +152,26 @@ export default function SupportBlock({currentSlide, setCurrentSlide, targetRef}:
 						<div className={styles.fabricDelivery__formWrapper}>
 							<h2>бронь & консУльтациЯ</h2>
 
-							<form action="#" className={styles.form}>
-								<SiteInput var2 placeholder="Тел" />
+							<form
+								action="#"
+								className={styles.form}
+								onSubmit={(e) => {
+									e.preventDefault();
+									sendForm();
+								}}
+							>
+								<SiteInput
+									var2
+									placeholder="Тел"
+									type="tel"
+									value={formData.tel}
+									onChange={(e) =>
+										setFormData({
+											...formData,
+											tel: e.target.value,
+										})
+									}
+								/>
 								<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
 							</form>
 
@@ -117,7 +180,7 @@ export default function SupportBlock({currentSlide, setCurrentSlide, targetRef}:
 					</div>
 				</div>
 
-                <div className={styles.block__bg}></div>
+				<div className={styles.block__bg}></div>
 			</div>
 		</>
 	);

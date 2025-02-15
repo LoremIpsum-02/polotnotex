@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./SiteHeader.module.css";
 
@@ -11,43 +11,47 @@ import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
 
 interface Props {
-	selectFabric: (arg: any) => void;
-    productsRef: RefObject<HTMLDivElement>,
-    menu__info: any,
+	selectFabric?: (arg: any) => void;
+	productsRef?: RefObject<HTMLDivElement>;
+	menu__info?: any;
 }
 
-export default function SiteHeader({ selectFabric, productsRef, menu__info }: Props) {
+export default function SiteHeader({
+	selectFabric,
+	productsRef,
+	menu__info,
+}: Props) {
 	const menu__fabricCatalog = [
 		{
-            type: "Флис",
-            subtypes: ["односторонний"],
-            availability: [],
-        },
-        {
-            type: "Флис",
-            subtypes: ["двухсторонний"],
-            availability: [],
-        },
-        {
-            type: "Флис",
-            subtypes: ["Трикотаж на флисе"],
-            availability: [],
-        },
+			type: "Флис",
+			subtypes: ["односторонний"],
+			availability: [],
+		},
 		{
-            type: "Футер",
-            subtypes: ["2-х нитка"],
-            availability: [],
-        },
-        {
-            type: "Футер",
-            subtypes: ["3-х нитка"],
-            availability: [],
-        },
+			type: "Флис",
+			subtypes: ["двухсторонний"],
+			availability: [],
+		},
 		{
-            type: "Ткань для термобелья",
-            subtypes: [],
-            availability: [],
-        },
+			type: "Флис",
+			subtypes: ["Трикотаж на флисе"],
+			availability: [],
+		},
+		{
+			type: "Футер",
+			subtypes: ["2-х нитка"],
+			availability: [],
+		},
+		{
+			type: "Футер",
+			subtypes: ["3-х нитка"],
+			availability: [],
+		},
+		{
+			type: "Ткань для термобелья",
+			subtypes: [],
+			availability: [],
+		},
 	];
 
 	return (
@@ -87,45 +91,67 @@ export default function SiteHeader({ selectFabric, productsRef, menu__info }: Pr
 									/>
 								</a>
 								<div className={styles.menuBtns__wrapper}>
-									<div className={[styles.catalogBtn__wrapper, styles.btnWrapper].join(' ')}>
+									<div
+										className={`
+											${styles.catalogBtn__wrapper}
+											${styles.btnWrapper}
+                                            ${productsRef ? '' : styles.hide}
+										`}
+									>
 										<button
 											className={[
 												styles.menu_btn,
 												styles.catalog__btn,
 											].join(" ")}
-                                            onClick={e => e.preventDefault()}
+											onClick={(e) => e.preventDefault()}
 										>
 											Каталог ткани
 										</button>
 
 										<div
-											className={[
-												styles.headerMenu,
-												styles.fabricCatalog__menu,
-											].join(" ")}
+											className={`
+												${styles.headerMenu}
+												${styles.fabricCatalog__menu}
+											`}
 										>
-											{menu__fabricCatalog.map((item, index) => (
-												<button
-													className={styles.menuItem}
-													key={index}
-                                                    onClick={() => {
-                                                        selectFabric(item)
-                                                        productsRef.current?.scrollIntoView({ behavior: "smooth" });
-                                                    }}
-												>
-													{item.type}{' '}{item.subtypes}
-												</button>
-											))}
+											{selectFabric ? menu__fabricCatalog.map(
+												(item, index) => (
+													<button
+														className={
+															styles.menuItem
+														}
+														key={index}
+														onClick={() => {
+															selectFabric(item);
+															productsRef?.current.scrollIntoView(
+																{
+																	behavior:
+																		"smooth",
+																}
+															);
+														}}
+													>
+														{item.type}{" "}
+														{item.subtypes}
+													</button>
+												)
+											) : null}
 										</div>
 									</div>
 
-									<div className={[styles.infoBtn__wrapper, styles.btnWrapper].join(' ')}>
+									<div
+										className={`
+											${styles.infoBtn__wrapper}
+											${styles.btnWrapper}
+                                            ${menu__info ? '' : styles.hide}
+                                        `}
+									>
 										<button
 											className={[
 												styles.menu_btn,
 												styles.info__btn,
 											].join(" ")}
-                                            onClick={e => e.preventDefault()}
+											onClick={(e) => e.preventDefault()}
 										>
 											Информация
 										</button>
@@ -136,15 +162,17 @@ export default function SiteHeader({ selectFabric, productsRef, menu__info }: Pr
 												styles.info__menu,
 											].join(" ")}
 										>
-											{menu__info.map((item: any) => (
+											{menu__info ? menu__info.map((item: any) => (
 												<button
 													className={styles.menuItem}
 													key={item.name}
-                                                    onClick={() => item.handleClick()}
+													onClick={() =>
+														item.handleClick()
+													}
 												>
 													{item.name}
 												</button>
-											))}
+											)) : null}
 										</div>
 									</div>
 								</div>

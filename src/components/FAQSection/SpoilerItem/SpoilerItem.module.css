@@ -29,6 +29,7 @@
 .spoiler__text{
     font-size: 1.125rem;
     font-weight: 400;
+    padding: 10px;
 }
 
 .active{

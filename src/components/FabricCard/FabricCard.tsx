@@ -21,6 +21,7 @@ import OrderSample from "@/components/OrderSample/OrderSample";
 import DeliveryInfo from "@/components/DeliveryInfo/DeliveryInfo";
 import PaymentInfo from "@/components/PaymentInfo/PaymentInfo";
 import OpportunitiesInfo from "@/components/OpportunitiesInfo/OpportunitiesInfo";
+import { sendOrder } from "@/utils/sendOrder";
 
 interface FabricCardProps {
 	fabric_id: number | string;
@@ -37,6 +38,8 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 	const [deliveryInfo, setDeliveryInfo] = useState<boolean>(false);
 	const [paymentInfo, setPaymentInfo] = useState<boolean>(false);
 	const [opportunitiesInfo, setOpportunitiesInfo] = useState<boolean>(false);
+
+    const [buyShow, setBuyShow] = useState<boolean>(false)
 
 	const opportunitiesList = [
 		{
@@ -75,7 +78,7 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 			setFabricVariations(variations);
             setCurrentVariation(variations[0])
 		} catch (error: any) {
-			console.error("Error fetching fabric data:", error);
+			console.error("Error fetching fabric data: ", error);
 		} finally {
 			setIsLoading(false);
 		}
@@ -102,10 +105,12 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 	return (
 		<>
 			{isLoading && !fabricData && !fabricVariations ? (
-				<h3>Loading...</h3>
+				<h3>Загрузка...</h3>
 			) : (
 				<>
 					<Popup show={showOrderSample} setShow={setShowOrderSampler}>
+                    <h4>ЗАКАЗАТЬ ОБРАЗЕЦ ТКАНИ</h4>
+
 						<OrderSample
 							fabricName={`${fabricData?.type} ${fabricData?.subtype} ${fabricData?.density}, ${currentVariation?.color}`}
 						/>
@@ -123,6 +128,16 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 					>
 						<OpportunitiesInfo />
 					</Popup>
+
+                    <Popup show={buyShow} setShow={setBuyShow}>
+                        <h4>
+                            Купить ткань
+                        </h4>
+
+                        <OrderSample
+							fabricName={`${fabricData?.type} ${fabricData?.subtype} ${fabricData?.density}, ${currentVariation?.color}`}
+						/>
+                    </Popup>
 
 					<div className={styles.fabricCard}>
 						<div className={styles.inner}>
@@ -469,7 +484,7 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 											Заказать образец
 										</button>
 
-										<button className={styles.buy__btn}>
+										<button className={styles.buy__btn} onClick={() => setBuyShow(true)}>
 											КУПИТЬ
 											<Image
 												src={buyIcon}

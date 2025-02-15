@@ -17,10 +17,6 @@
     text-align: center;
     width: 100%;
 }
-.title{
-    font-family: "Involve", sans-serif;
-    color: var(--c1);
-}
 .fabricName{
     font-family: 'Involve', sans-serif;
     color: var(--text);

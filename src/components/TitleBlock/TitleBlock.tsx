@@ -9,6 +9,7 @@ import addressIcon from "@/assets/media/titleBlock/icon.png";
 import SiteBtn from "../UI/button/SiteBtn";
 import { useState } from "react";
 import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
+import { useRouter } from "next/navigation";
 
 export default function TitleBlock() {
 	const advantages = [
@@ -23,14 +24,40 @@ export default function TitleBlock() {
 		phoneNumber: "",
 	});
 
-	function sendForm() {
-		// Actions with formData...
+    const router = useRouter()
+
+	async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: formData.name,
+					phone: formData.phoneNumber,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				meta_data: [
+					{
+						key: "comment",
+						value: formData.email,
+					},
+				],
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
 
 		setFormData({
 			name: "",
 			email: "",
 			phoneNumber: "",
 		});
+
+        localStorage.setItem('thankReason', 'form')
+        router.push('/thank-you')
 	}
 
 	return (
@@ -87,7 +114,10 @@ export default function TitleBlock() {
 						Отправить заявку поставщикУ
 					</h2>
 
-					<form action="#" className={styles.form}>
+					<form action="#" className={styles.form} onSubmit={e => {
+                        e.preventDefault()
+                        sendForm()
+                    }}>
 						<SiteInput
 							placeholder="Имя"
 							type="text"

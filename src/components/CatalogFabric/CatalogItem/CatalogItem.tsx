@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./CatalogItem.module.css";
 
@@ -6,11 +6,12 @@ import Image from "next/image";
 import icon__eye from "@/assets/media/fabricCards/eye-icon.png";
 import Link from "next/link";
 import Popup from "@/components/UI/popup/Popup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FabricCard from "@/components/FabricCard/FabricCard";
 import OrderSample from "@/components/OrderSample/OrderSample";
-import buyIcon from '@/assets/media/catalog/buy-icon.png'
-import noImage from '@/assets/media/no-image.jpg'
+import buyIcon from "@/assets/media/catalog/buy-icon.png";
+import noImage from "@/assets/media/no-image.jpg";
+import icon__tooltip from "@/assets/media/fabricCards/tooltip-icon.png";
 
 interface FabricItem {
 	id: number | string;
@@ -30,22 +31,46 @@ interface Props {
 }
 
 export default function CatalogItem({ fabricItem }: Props) {
-    const [showFabricPopup, setShowFabricPopup] = useState<boolean>(false)
-    const [showOrderSample, setShowOrderSample] = useState<boolean>(false)
+	const [showFabricPopup, setShowFabricPopup] = useState<boolean>(false);
+	const [showOrderSample, setShowOrderSample] = useState<boolean>(false);
+	const [currentPreview, setCurrentPreview] = useState(0);
+	const [isHovering, setIsHovering] = useState(false);
+
+	useEffect(() => {
+		if (!isHovering || !fabricItem.images || fabricItem.images.length <= 1)
+			return;
+
+		const interval = setInterval(() => {
+			setCurrentPreview((prev) => (prev + 1) % fabricItem.images!.length);
+		}, 1000); // Change image every second
+
+		return () => clearInterval(interval);
+	}, [isHovering, fabricItem.images]);
 
 	return (
 		<>
-            <Popup show={showFabricPopup} setShow={setShowFabricPopup}>
-                <FabricCard fabric_id={fabricItem.id} />
-            </Popup>
+			<Popup show={showFabricPopup} setShow={setShowFabricPopup}>
+				<FabricCard fabric_id={fabricItem.id} />
+			</Popup>
 
-            <Popup show={showOrderSample} setShow={setShowOrderSample}>
-                <OrderSample fabricName={`
+			<Popup show={showOrderSample} setShow={setShowOrderSample}>
+				<h4>ЗАКАЗАТЬ ОБРАЗЕЦ ТКАНИ</h4>
+
+				<OrderSample
+					fabricName={`
                     ${fabricItem.type} ${fabricItem.subtype} ${fabricItem.density}, ${fabricItem.colors[0]}
-                `} />
-            </Popup>
+                `}
+				/>
+			</Popup>
 
-			<div className={styles.card}>
+			<div
+				className={styles.card}
+				onMouseEnter={() => setIsHovering(true)}
+				onMouseLeave={() => {
+					setIsHovering(false);
+					setCurrentPreview(0); // Reset to first image when hover ends
+				}}
+			>
 				<div
 					className={styles.picture__container}
 					onClick={(e) => e.stopPropagation()}
@@ -53,14 +78,15 @@ export default function CatalogItem({ fabricItem }: Props) {
 					<div className={styles.pictureContainer__inner}>
 						<Link href={`/fabric-page/${fabricItem.id}`}>
 							<Image
-								src={fabricItem.images ?
-                                    fabricItem.images[0].src
-                                    : noImage
-                                }
+								src={
+									fabricItem.images
+										? fabricItem.images[currentPreview].src
+										: noImage
+								}
 								alt=""
 								className={styles.card__image}
-                                width={1000}
-                                height={1000}
+								width={1000}
+								height={1000}
 							/>
 						</Link>
 						<div className={styles.badges__wrapper}>
@@ -84,7 +110,7 @@ export default function CatalogItem({ fabricItem }: Props) {
 							<button
 								className={styles.popup__btn}
 								onClick={(e) => {
-									setShowFabricPopup(!showFabricPopup)
+									setShowFabricPopup(!showFabricPopup);
 								}}
 							>
 								<Image
@@ -98,7 +124,10 @@ export default function CatalogItem({ fabricItem }: Props) {
 				</div>
 
 				<div className={styles.card__info}>
-					<Link href={`/fabric-page/${fabricItem.id}`} className={styles.title__wrapper}>
+					<Link
+						href={`/fabric-page/${fabricItem.id}`}
+						className={styles.title__wrapper}
+					>
 						{fabricItem.type} {fabricItem.subtype} <br />
 						{fabricItem.density}
 					</Link>
@@ -114,9 +143,9 @@ export default function CatalogItem({ fabricItem }: Props) {
 							<p className={styles.parameter__name}>Состав</p>
 
 							<div className={styles.composition__wrapper}>
-								{fabricItem.composition?.map(item => (
-                                        <span key={item}>{item}<br /></span>
-                                ))}
+								{fabricItem.composition
+									? fabricItem.composition[0]
+									: " - "}
 							</div>
 						</div>
 
@@ -130,17 +159,36 @@ export default function CatalogItem({ fabricItem }: Props) {
 					<div className={styles.price__wrapper}>
 						От{" "}
 						<span className={styles.price}>{fabricItem.price}</span>
-						/кг (5 п/м)
+						/кг (5 п/м){" "}
+						<div className={styles.tooltip__wrapper}>
+							<Image
+								src={icon__tooltip}
+								alt=""
+								className={styles.tooltipIcon}
+							/>
+							<div className={styles.tooltip__text}>
+								Предоставленная на сайте информация носит
+								ознакомительный характер и не является публичной
+								офертой. Наличие и актуальную цену уточняйте у
+								менеджеров отдела продаж.
+							</div>
+						</div>
 					</div>
 
-					<button className={styles.orderSample__btn} onClick={e => setShowOrderSample(!showOrderSample)}>
+					<button
+						className={styles.orderSample__btn}
+						onClick={(e) => setShowOrderSample(!showOrderSample)}
+					>
 						Заказать образец ткани
 					</button>
 
-                    <Link href={`/fabric-page/${fabricItem.id}`} className={styles.btn__buy}>
-                        <Image src={buyIcon} alt="" />
-                        Купить
-                    </Link>
+					<Link
+						href={`/fabric-page/${fabricItem.id}`}
+						className={styles.btn__buy}
+					>
+						<Image src={buyIcon} alt="" />
+						Купить
+					</Link>
 				</div>
 			</div>
 		</>

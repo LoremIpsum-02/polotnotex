@@ -1,9 +1,10 @@
 import styles from "./OrderSample.module.css";
 
 import { useState } from "react";
-import SiteInput from "../UI/input/SiteInput";
-import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
-import SiteBtn from "../UI/button/SiteBtn";
+import SiteInput from "@/components/UI/input/SiteInput";
+import FormPolicyAgreement from "@/components/UI/FormPolicyAgreement/FormPolicyAgreement";
+import SiteBtn from "@/components/UI/button/SiteBtn";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	fabricName: string;
@@ -15,16 +16,50 @@ export default function OrderSample({ fabricName }: Props) {
 		name: ``,
 		comment: ``,
 	});
+
+    const router = useRouter()
+
+	async function sendForm(e: React.FormEvent) {
+		e.preventDefault();
+
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: formData.name,
+					phone: formData.tel,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				meta_data: [
+					{
+						key: "comment",
+						value: formData.comment,
+					},
+				],
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+        localStorage.setItem('thankReason', 'order')
+        router.push('/thank-you')
+	}
 	return (
 		<>
 			<div className={styles.orderSample}>
 				<div className={styles.titles__wrapper}>
-					<h2 className={styles.title}>ЗАКАЗАТЬ ОБРАЗЕЦ ТКАНИ</h2>
-
 					<h2 className={styles.fabricName}>{fabricName}</h2>
 				</div>
 
-				<form action="#" className={styles.form}>
+				<form
+					action="#"
+					className={styles.form}
+					onSubmit={(e) => sendForm(e)}
+				>
 					<div className={styles.inputs__wrapper}>
 						<SiteInput
 							var2

@@ -1,23 +1,20 @@
-import SiteBtn from "../UI/button/SiteBtn";
+"use client"
+
 import styles from "./FabricDescription.module.css";
 
+import SiteBtn from "../UI/button/SiteBtn";
 import { fabricDescriptions } from "@/actions";
+import { useState } from "react";
+import DescriptionItem from "./DescriptionItem/DescriptionItem";
 
 export default function FabricDescription() {
 	const fabricsList = fabricDescriptions();
+
 	return (
 		<>
 			<div className={styles.fabricDescriptions}>
 				{fabricsList.map((fabric) => (
-					<div className={styles.fabricItem} key={fabric.fabricName}>
-						<h2>{fabric.fabricName}</h2>
-
-						<div className={styles.fabric__text}>
-							{fabric.fabricDescription}
-						</div>
-
-						<div className={styles.btn__wrapper}><SiteBtn>Подробнее</SiteBtn></div>
-					</div>
+					<DescriptionItem fabric={fabric} key={fabric.fabricName} />
 				))}
 			</div>
 		</>

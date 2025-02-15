@@ -1,0 +1,10 @@
+.thankYou__page{
+    text-align: center;
+    padding: 30px;
+}
+
+.text{
+    font-size: 1.2rem;
+    margin: 20px;
+    color: var(--c1);
+}

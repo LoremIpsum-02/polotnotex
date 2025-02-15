@@ -1,10 +1,57 @@
+'use client'
+
 import styles from "./Slide4.module.css";
 
 import SiteBtn from "@/components/UI/button/SiteBtn";
 import FormPolicyAgreement from "@/components/UI/FormPolicyAgreement/FormPolicyAgreement";
 import SiteInput from "@/components/UI/input/SiteInput";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Slide4() {
+    const router = useRouter(
+
+    )
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        tel: '',
+    })
+
+    async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: formData.name,
+					phone: formData.tel,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				meta_data: [
+					{
+						key: "comment",
+						value: formData.email,
+					},
+				],
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+		setFormData({
+			name: "",
+			email: "",
+			tel: "",
+		});
+
+        localStorage.setItem('thankReason', 'form')
+        router.replace('/thank-you')
+	}
+
 	return (
 		<>
 			<div className={styles.slide4__container}>
@@ -32,10 +79,13 @@ export default function Slide4() {
 						ПОДБОРУ ТКАНИ
 					</p>
 
-					<form action="#" className={styles.form}>
-						<SiteInput placeholder="Имя" />
-						<SiteInput placeholder="Эл. почта" />
-						<SiteInput placeholder="Тел" />
+					<form action="#" className={styles.form} onSubmit={(e) => {
+                        e.preventDefault()
+                        sendForm()
+                    }}>
+						<SiteInput placeholder="Имя" type="text" value={formData.name}  onChange={e => setFormData({...formData, name: e.target.value})} />
+						<SiteInput placeholder="Эл. почта" type="email" value={formData.email}  onChange={e => setFormData({...formData, email: e.target.value})} />
+						<SiteInput placeholder="Тел" type="tel" value={formData.tel}  onChange={e => setFormData({...formData, tel: e.target.value})} />
 						<SiteBtn>Смотреть все</SiteBtn>
 					</form>
 

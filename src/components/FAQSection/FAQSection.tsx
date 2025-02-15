@@ -11,12 +11,13 @@ import icon__wa from "@/assets/media/social-media/whatsapp.png";
 import icon__tg from "@/assets/media/social-media/telegram.png";
 import { RefObject, useState } from "react";
 import SpoilerItem from "./SpoilerItem/SpoilerItem";
+import { useRouter } from "next/navigation";
 
-interface Props{
-    targetRef: RefObject<HTMLDivElement>;
+interface Props {
+	targetRef: RefObject<HTMLDivElement>;
 }
 
-export default function FAQSection({targetRef}: Props) {
+export default function FAQSection({ targetRef }: Props) {
 	const spoilersData = [
 		{
 			id: 1,
@@ -75,6 +76,47 @@ export default function FAQSection({targetRef}: Props) {
 
 	const [activeSpoiler, setActiveSpoiler] = useState<null | string>(null);
 
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		comment: "",
+	});
+
+	const router = useRouter();
+
+	async function sendForm() {
+		const response = await fetch("/api/proxy", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				billing: {
+					first_name: formData.name,
+					email: "test@example.com", // WooCommerce requires an email
+				},
+				meta_data: [
+					{
+						key: "comment",
+						value: formData.comment,
+					},
+				],
+				line_items: [], // Add products if needed
+			}),
+		});
+
+		const data = await response.json();
+
+		setFormData({
+			name: "",
+			email: "",
+			comment: "",
+		});
+
+		localStorage.setItem("thankReason", "form");
+		router.push("/thank-you");
+	}
+
 	return (
 		<>
 			<div className={styles.faqSection} ref={targetRef}>
@@ -88,7 +130,7 @@ export default function FAQSection({targetRef}: Props) {
 									spoiler={item}
 									activeSpoiler={activeSpoiler}
 									setActiveSpoiler={setActiveSpoiler}
-                                    key={item.id}
+									key={item.id}
 								/>
 							))}
 						</div>
@@ -97,12 +139,48 @@ export default function FAQSection({targetRef}: Props) {
 					<div className={styles.form__wrapper}>
 						<h2>не нашли ответ на вопрос? задай свой!</h2>
 
-						<form action="#" className={styles.form}>
-							<SiteInput var2 placeholder="Имя" />
-							<SiteInput var2 placeholder="Эл. почта" />
+						<form
+							action="#"
+							className={styles.form}
+							onSubmit={(e) => {
+								e.preventDefault();
+								sendForm();
+							}}
+						>
+							<SiteInput
+								var2
+								placeholder="Имя"
+								type="text"
+								value={formData.name}
+								onChange={(e) =>
+									setFormData({
+										...formData,
+										name: e.target.value,
+									})
+								}
+							/>
+							<SiteInput
+								var2
+								placeholder="Эл. почта"
+								type="email"
+								value={formData.email}
+								onChange={(e) =>
+									setFormData({
+										...formData,
+										email: e.target.value,
+									})
+								}
+							/>
 							<textarea
 								className={styles.messageInput}
 								placeholder="Опишите свой заказ"
+								value={formData.comment}
+								onChange={(e) =>
+									setFormData({
+										...formData,
+										comment: e.target.value,
+									})
+								}
 							/>
 							<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
 							<FormPolicyAgreement />

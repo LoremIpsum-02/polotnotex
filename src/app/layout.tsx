@@ -2,7 +2,7 @@ import "./globals.css";
 
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import SiteFooter from "@/components/SiteFooter/SiteFooter";
+import SiteHeader from "@/components/SiteHeader/SiteHeader";
 
 export const metadata: Metadata = {
 	title: "Polotnotex",

@@ -55,6 +55,12 @@
         justify-content: left;
 
         overflow-x: scroll;
-        padding: 0 20px;
+        overflow-y: visible;
+        padding: 30px;
+        margin: 0;
+    }
+
+    .fabricDescription__container{
+        padding: 0 10px;
     }
 }

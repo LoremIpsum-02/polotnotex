@@ -1,5 +1,11 @@
 import styles from "./AdvantagesSection.module.css";
 
+import img1 from '@/assets/media/advantages/img1.jpg'
+import img2 from '@/assets/media/advantages/img2.jpg'
+import img3 from '@/assets/media/advantages/img3.jpg'
+import img4 from '@/assets/media/advantages/img4.jpg'
+import Image from "next/image";
+
 export default function AdvantagesSection() {
 	const advantagesList = [
 		{
@@ -10,6 +16,8 @@ export default function AdvantagesSection() {
                 
                 Качество и цвета ткани постоянны без изменений.
             `,
+            bg: `../../assets/media/advantages/img1.jpg`,
+            image: img1,
 		},
 		{
 			title: "РЕАГИРУЕМ НА СПРОС",
@@ -18,6 +26,8 @@ export default function AdvantagesSection() {
 
                 Собственные склады ткани. 
             `,
+            bg: `../../assets/media/advantages/img2.jpg`,
+            image: img2,
 		},
 		{
 			title: "МИНИМАЛЬНАЯ НАЦЕНКА",
@@ -26,6 +36,8 @@ export default function AdvantagesSection() {
                 
                 Цены как есть. Гарантия!
             `,
+            bg: `../../assets/media/advantages/img3.jpg`,
+            image: img3,
 		},
 		{
 			title: "ДОСТАВКА НА ЗАКАЗ",
@@ -34,6 +46,8 @@ export default function AdvantagesSection() {
 
                 На месте соберем для вас образцы ткани по запросу.
             `,
+            bg: `../../assets/media/advantages/img4.jpg`,
+            image: img4,
 		},
 	];
 
@@ -52,6 +66,7 @@ export default function AdvantagesSection() {
 								key={item.title}
 							>
 								<div className={styles.image__container}>
+                                    <Image src={item.image} alt="" className={styles.image} />
 									<div className={styles.title}>
 										{item.title}
 									</div>

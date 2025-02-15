@@ -38,6 +38,10 @@ html, body{
     max-width: 1440px;
     margin: 0 auto;
     height: 100%;
+}
+.main{
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
@@ -55,6 +59,7 @@ h1{
     color: var(--c1);
     font-family: 'Involve', sans-serif;
     text-transform: uppercase;
+    line-height: 0.9;
 }
 
 h2{
@@ -63,7 +68,7 @@ h2{
 		calc(22px + (28 - 22) * ((100vw - 390px) / (1440 - 390))),
 		1.75rem
 	);
-    font-weight: 400;
+    font-weight: 600;
     font-family: 'NK133', sans-serif;
     text-transform: uppercase;
     color: var(--text);
@@ -74,4 +79,18 @@ button{
 }
 button:hover{
     transform: scale(1.05);
+}
+
+textarea::placeholder{
+    color: var(--c1);
+}
+
+h4{
+    font-family: "Involve", sans-serif;
+    color: var(--c1);
+    font-size: clamp(
+		1.375rem,
+		calc(22px + (28 - 22) * ((100vw - 390px) / (1440 - 390))),
+		1.75rem
+	);
 }
