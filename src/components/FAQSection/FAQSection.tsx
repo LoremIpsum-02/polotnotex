@@ -12,6 +12,7 @@ import icon__tg from "@/assets/media/social-media/telegram.png";
 import { RefObject, useState } from "react";
 import SpoilerItem from "./SpoilerItem/SpoilerItem";
 import { useRouter } from "next/navigation";
+import LinkComponent from "../UI/link/LinkComponent";
 
 interface Props {
 	targetRef: RefObject<HTMLDivElement>;
@@ -192,23 +193,27 @@ export default function FAQSection({ targetRef }: Props) {
 							</p>
 
 							<div className={styles.btns__wrapper}>
-								<a href="https://wa.me/790169000907" className={styles.socialBtn}>
-									WhatsApp-chat
-									<Image
-										src={icon__wa}
-										alt=""
-										className={styles.social__icon}
-									/>
-								</a>
+								<LinkComponent href="https://wa.me/790169000907" className={styles.socialBtn}>
+									<button className={styles.socialBtn}>
+									    WhatsApp-chat
+    									<Image
+    										src={icon__wa}
+    										alt=""
+    										className={styles.social__icon}
+    									/>
+									</button>
+								</LinkComponent>
 
-								<a href="https://t.me/tekstilnoyepolotno" className={styles.socialBtn}>
-									Telegram-kanal
-									<Image
-										src={icon__tg}
-										alt=""
-										className={styles.social__icon}
-									/>
-								</a>
+								<LinkComponent href="https://t.me/tekstilnoyepolotno">
+									<button className={styles.socialBtn}>
+									    Telegram-kanal
+    									<Image
+    										src={icon__tg}
+    										alt=""
+    										className={styles.social__icon}
+    									/>
+									</button>
+								</LinkComponent>
 							</div>
 						</div>
 					</div>

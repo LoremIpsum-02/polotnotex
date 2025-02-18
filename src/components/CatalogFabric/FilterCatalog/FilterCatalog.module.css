@@ -88,6 +88,9 @@
     white-space: nowrap;
 }
 
+.social_link{
+    color: var(--c3);
+}
 .social_icon{
     width: 30px;
     height: auto;

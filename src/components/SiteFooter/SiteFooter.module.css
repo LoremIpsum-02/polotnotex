@@ -69,6 +69,12 @@
     left: -30px;
 }
 
+.phoneNumbers__container{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
 .picture{
     height: auto;
     width: 100%;

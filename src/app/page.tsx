@@ -17,6 +17,7 @@ import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
 import { RefObject, useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter/SiteFooter";
+import getSocialLinks from "@/hooks/getLinks";
 
 export default function Home() {
 	const [preselectedFilter, setPreselectedFilter] = useState({
@@ -104,6 +105,10 @@ export default function Home() {
 			},
 		},
 	];
+
+    // useEffect(() => {
+    //     console.log(getSocialLinks())
+    // }, [])
 
 	return (
 		<>

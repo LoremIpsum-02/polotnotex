@@ -171,11 +171,14 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
                                     e.preventDefault()
                                     sendForm()
                                     }}>
-									<SiteInput var2 placeholder="Тел" value={formData.tel} onChange={e => setFormData({tel: e.target.value})} />
-									<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+                                        <div className={styles.form__inner}>
+                                            
+    									<SiteInput var2 placeholder="Тел" value={formData.tel} onChange={e => setFormData({tel: e.target.value})} />
+    									<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+                                        </div>
+                                        <FormPolicyAgreement />
 								</form>
 
-								<FormPolicyAgreement />
 							</div>
 						</div>
 					</div>

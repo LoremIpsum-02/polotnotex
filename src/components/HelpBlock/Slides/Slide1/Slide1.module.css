@@ -35,6 +35,9 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    justify-content: space-between;
+
+    width: 100%;
 }
 
 .address__wrapper{
@@ -58,6 +61,7 @@
     padding: 10px 20px;
     border-radius: 90px;
     color: var(--text);
+    width: 100%;
 
     display: flex;
     align-items: center;

@@ -11,19 +11,21 @@ import decoration from "@/assets/media/order-fabric/form-decoration.png";
 import { useRouter } from "next/navigation";
 
 interface Props {
-    targetRef: RefObject<HTMLDivElement>;
+	targetRef: RefObject<HTMLDivElement>;
 }
 
-export default function OrderFabric({targetRef}: Props) {
+export default function OrderFabric({ targetRef }: Props) {
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
-		phoneNum: "",
+		phoneNumber: "",
+		price_production: false,
+		price_availability: false,
 	});
 
-    const router = useRouter()
+	const router = useRouter();
 
-    async function sendForm() {
+	async function sendForm() {
 		const response = await fetch("/api/proxy", {
 			method: "POST",
 			headers: {
@@ -32,7 +34,7 @@ export default function OrderFabric({targetRef}: Props) {
 			body: JSON.stringify({
 				billing: {
 					first_name: formData.name,
-					phone: formData.phoneNum,
+					phone: formData.phoneNumber,
 					email: "test@example.com", // WooCommerce requires an email
 				},
 				meta_data: [
@@ -47,14 +49,8 @@ export default function OrderFabric({targetRef}: Props) {
 
 		const data = await response.json();
 
-		setFormData({
-			name: "",
-			email: "",
-			phoneNum: "",
-		});
-
-        localStorage.setItem('thankReason', 'form')
-        router.push('/thank-you')
+		localStorage.setItem("thankReason", "form");
+		router.push("/thank-you");
 	}
 
 	return (
@@ -64,10 +60,14 @@ export default function OrderFabric({targetRef}: Props) {
 					<h2>заказать ткань оптом со склада или забронировать</h2>
 
 					<div className={styles.content}>
-						<form action="#" className={styles.form} onSubmit={(e) => {
-                            e.preventDefault()
-                            sendForm()}
-                        }>
+						<form
+							action="#"
+							className={styles.form}
+							onSubmit={(e) => {
+								e.preventDefault();
+								sendForm();
+							}}
+						>
 							<SiteInput
 								value={formData.name}
 								onChange={(e) =>
@@ -93,11 +93,11 @@ export default function OrderFabric({targetRef}: Props) {
 
 							<SiteInput
 								type="tel"
-								value={formData.phoneNum}
+								value={formData.phoneNumber}
 								onChange={(e) =>
 									setFormData({
 										...formData,
-										phoneNum: e.target.value,
+										phoneNumber: e.target.value,
 									})
 								}
 								placeholder="Тел"
@@ -105,11 +105,41 @@ export default function OrderFabric({targetRef}: Props) {
 
 							<div className={styles.points__wrapper}>
 								<div className={styles.formPoint}>
-									Нужен прайс с ценами производства
+									<input
+										type="checkbox"
+										checked={formData.price_production}
+										onChange={(e) =>
+											setFormData({
+												...formData,
+												price_production:
+													e.target.checked,
+											})
+										}
+										id="price_production"
+                                        className={styles.form__checkbox}
+									/>
+									<label htmlFor="price_production">
+										Нужен прайс с ценами производства
+									</label>
 								</div>
 
 								<div className={styles.formPoint}>
-									Нужен прайс с ценами о наличии
+									<input
+										type="checkbox"
+										checked={formData.price_availability}
+										onChange={(e) =>
+											setFormData({
+												...formData,
+												price_availability:
+													e.target.checked,
+											})
+										}
+										id="price_availability"
+                                        className={styles.form__checkbox}
+									/>
+									<label htmlFor="price_availability">
+										Нужен прайс с ценами о наличии
+									</label>
 								</div>
 							</div>
 

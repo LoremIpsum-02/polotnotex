@@ -50,10 +50,11 @@
 	font-size: 0.875rem;
 	font-weight: 600;
 
-    position: relative;
-    right: -30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.formPoint::before{
+/* .formPoint::before{
     content: '';
 
     width: 24px;
@@ -66,7 +67,19 @@
     left: -30px;
     top: 50%;
     transform: translate(0, -55%);
-}
+} */
+ .form__checkbox{
+    appearance: none;
+    border-radius: 100%;
+    border: 2px solid var(--c1);
+    height: 24px;
+    aspect-ratio: 1;
+ }
+ .form__checkbox:checked{
+    background: url('../../assets/media/order-fabric/point-mark.png') no-repeat;
+    background-position: center;
+    background-size: contain;
+ }
 
 .text__container {
 	max-width: 595px;

@@ -8,6 +8,7 @@ import tgIcon from "@/assets/media/social-media/telegram.png";
 import pic1 from "@/assets/media/help-block/slides/slide1/pic1.png";
 import pic2 from "@/assets/media/help-block/slides/slide1/pic2.png";
 import pic3 from "@/assets/media/help-block/slides/slide1/pic3.png";
+import LinkComponent from "@/components/UI/link/LinkComponent";
 
 export default function Slide2() {
 	return (
@@ -61,14 +62,16 @@ export default function Slide2() {
 							</p>
 						</div>
 
-						<a href="#" className={styles.tg__btn}>
-							Telegram-kanal
-							<Image
-								src={tgIcon}
-								alt=""
-								className={styles.btnIcon}
-							/>
-						</a>
+						<LinkComponent href="https://t.me/tekstilnoyepolotno">
+							<button className={styles.tg__btn}>
+							    Telegram-kanal
+    							<Image
+    								src={tgIcon}
+    								alt=""
+    								className={styles.btnIcon}
+    							/>
+							</button>
+						</LinkComponent>
 					</div>
 				</div>
 			</div>

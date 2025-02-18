@@ -160,22 +160,24 @@ export default function SupportBlock({
 									sendForm();
 								}}
 							>
-								<SiteInput
-									var2
-									placeholder="Тел"
-									type="tel"
-									value={formData.tel}
-									onChange={(e) =>
-										setFormData({
-											...formData,
-											tel: e.target.value,
-										})
-									}
-								/>
-								<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+								<div className={styles.form__inner}>
+								    <SiteInput
+    									var2
+    									placeholder="Тел"
+    									type="tel"
+    									value={formData.tel}
+    									onChange={(e) =>
+    										setFormData({
+    											...formData,
+    											tel: e.target.value,
+    										})
+    									}
+    								/>
+    								<SiteBtn type='submit'>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+								</div>
+                                <FormPolicyAgreement />
 							</form>
 
-							<FormPolicyAgreement />
 						</div>
 					</div>
 				</div>

@@ -10,6 +10,8 @@ import SiteBtn from "../UI/button/SiteBtn";
 import { useState } from "react";
 import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
 import { useRouter } from "next/navigation";
+import sendForm from "@/hooks/sendForm";
+import LinkComponent from "../UI/link/LinkComponent";
 
 export default function TitleBlock() {
 	const advantages = [
@@ -24,49 +26,20 @@ export default function TitleBlock() {
 		phoneNumber: "",
 	});
 
-    const router = useRouter()
+	const router = useRouter();
 
-	async function sendForm() {
-		const response = await fetch("/api/proxy", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				billing: {
-					first_name: formData.name,
-					phone: formData.phoneNumber,
-					email: "test@example.com", // WooCommerce requires an email
-				},
-				meta_data: [
-					{
-						key: "comment",
-						value: formData.email,
-					},
-				],
-				line_items: [], // Add products if needed
-			}),
-		});
+	async function submitForm() {
+        sendForm(formData)
 
-		const data = await response.json();
-
-		setFormData({
-			name: "",
-			email: "",
-			phoneNumber: "",
-		});
-
-        localStorage.setItem('thankReason', 'form')
-        router.push('/thank-you')
+	    localStorage.setItem('thankReason', 'form')
+	    router.push('/thank-you')
 	}
 
 	return (
 		<div className={styles.titleBlock}>
 			<div className={styles.title_inner}>
 				<div className={styles.title__wrapper}>
-					<h1 className={styles.title}>
-						Ткань Начиличе Цены Оптовые
-					</h1>
+					<h1 className={styles.title}>Ткань Наличие Цены Оптовые</h1>
 					<h2 className={styles.subtile}>“ТЕКСТИЛЬНОЕ ПОЛОТНО”</h2>
 				</div>
 
@@ -96,7 +69,10 @@ export default function TitleBlock() {
 						</p>
 					</div>
 
-					<a href="https://t.me/tekstilnoyepolotno" className={styles.linkBtn}>
+					<a
+						href="https://t.me/tekstilnoyepolotno"
+						className={styles.linkBtn}
+					>
 						Telegram-kanal
 						<Image
 							src={icon_tg}
@@ -114,10 +90,14 @@ export default function TitleBlock() {
 						Отправить заявку поставщикУ
 					</h2>
 
-					<form action="#" className={styles.form} onSubmit={e => {
-                        e.preventDefault()
-                        sendForm()
-                    }}>
+					<form
+						action="#"
+						className={styles.form}
+						onSubmit={(e) => {
+							e.preventDefault();
+							submitForm();
+						}}
+					>
 						<SiteInput
 							placeholder="Имя"
 							type="text"
@@ -155,10 +135,7 @@ export default function TitleBlock() {
 						<FormPolicyAgreement />
 
 						<SiteBtn
-							onClick={(e) => {
-								e.preventDefault();
-								sendForm();
-							}}
+							type='submit'
 						>
 							ОСТАВИТЬ ЗАЯВКУ
 						</SiteBtn>
@@ -184,14 +161,17 @@ export default function TitleBlock() {
 							</p>
 						</div>
 
-						<a href="#" className={styles.linkBtn}>
+						<LinkComponent
+							href="https://t.me/tekstilnoyepolotno"
+							className={styles.linkBtn}
+						>
 							Telegram-kanal
 							<Image
 								src={icon_tg}
 								alt="Telegram-kanal"
 								className={styles.btn_icon}
 							/>
-						</a>
+						</LinkComponent>
 					</div>
 				</div>
 			</div>

@@ -76,6 +76,7 @@ h2{
 
 button{
     transition: all 0.2s;
+    cursor: pointer;
 }
 button:hover{
     transform: scale(1.05);

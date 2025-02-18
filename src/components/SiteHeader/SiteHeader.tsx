@@ -12,6 +12,7 @@ import icon_mail from "@/assets/media/header/socials/mail.png";
 import Popup from "../UI/popup/Popup";
 import OrderSample from "../OrderSample/OrderSample";
 import { useRouter } from "next/navigation";
+import LinkComponent from "../UI/link/LinkComponent";
 
 interface Props {
 	selectFabric?: (arg: any) => void;
@@ -77,13 +78,12 @@ export default function SiteHeader({
 						Открыто с 8.00 до 19.00 (Пн-Пт)
 					</p>
 
-					<a
+					<LinkComponent
 						href="tel:+790169000907"
 						type="tel"
-						className={styles.phoneNumber}
 					>
 						+790169000907
-					</a>
+					</LinkComponent>
 
 					<p className={styles.text}>Ткань оптом для пошива одежды</p>
 				</div>
@@ -91,10 +91,9 @@ export default function SiteHeader({
 					<div className={styles.header__innerWrapper}>
 						<div className={styles.header__contentWrapper}>
 							<nav className={styles.nav}>
-								<a
+								<LinkComponent
 									href="tel:+790169000907"
 									type="tel"
-									className={styles.call_btn}
 								>
 									<Image
 										src={phoneIcon}
@@ -104,7 +103,7 @@ export default function SiteHeader({
 											styles.header__icon,
 										].join(" ")}
 									/>
-								</a>
+								</LinkComponent>
 								{menu__info && menu__fabricCatalog ? (
 									<div className={styles.menuBtns__wrapper}>
 										<div
@@ -216,13 +215,12 @@ export default function SiteHeader({
                                     </button>
 								)}
 
-								<a
+								<LinkComponent
 									href="tel:+790169000907"
 									type="tel"
-									className={styles.phoneNumber}
 								>
 									+790169000907
-								</a>
+								</LinkComponent>
 							</nav>
 
 							<div className={styles.logo_wrapper}>
@@ -241,9 +239,9 @@ export default function SiteHeader({
 								</p>
 
 								<div className={styles.socials_wrapper}>
-									<a
+									<LinkComponent
 										href="https://wa.me/790169000907"
-										className={styles.social_link}
+                                        
 									>
 										<Image
 											src={icon_wa}
@@ -253,11 +251,10 @@ export default function SiteHeader({
 												styles.header__icon,
 											].join(" ")}
 										/>
-									</a>
+									</LinkComponent>
 
-									<a
+									<LinkComponent
 										href="https://t.me/tekstilnoyepolotno"
-										className={styles.social_link}
 									>
 										<Image
 											src={icon_tg}
@@ -267,7 +264,7 @@ export default function SiteHeader({
 												styles.header__icon,
 											].join(" ")}
 										/>
-									</a>
+									</LinkComponent>
 
 									<button
 										className={styles.social_link}
@@ -287,9 +284,8 @@ export default function SiteHeader({
 						</div>
 
 						<div className={styles.mob__iconsContainer}>
-							<a
+							<LinkComponent
 								href="https://t.me/tekstilnoyepolotno"
-								className={styles.social_link}
 							>
 								<Image
 									src={icon_tg}
@@ -299,11 +295,10 @@ export default function SiteHeader({
 										styles.header__icon,
 									].join(" ")}
 								/>
-							</a>
+							</LinkComponent>
 
-							<a
+							<LinkComponent
 								href="https://wa.me/790169000907"
-								className={styles.social_link}
 							>
 								<Image
 									src={icon_wa}
@@ -313,7 +308,7 @@ export default function SiteHeader({
 										styles.header__icon,
 									].join(" ")}
 								/>
-							</a>
+							</LinkComponent>
 
 							<button
 								className={styles.social_link}
@@ -329,7 +324,7 @@ export default function SiteHeader({
 								/>
 							</button>
 
-							<a
+							<LinkComponent
 								href="tel:+790169000907"
 								type="tel"
 								className={styles.call_btn}
@@ -342,7 +337,7 @@ export default function SiteHeader({
 										styles.header__icon,
 									].join(" ")}
 								/>
-							</a>
+							</LinkComponent>
 						</div>
 					</div>
 				</div>

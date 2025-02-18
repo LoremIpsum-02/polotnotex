@@ -10,6 +10,7 @@ import title__arrowIcon from "@/assets/media/fabricCards/title-arrow.png";
 import { useEffect, useState } from "react";
 import Popup from "@/components/UI/popup/Popup";
 import OrderSample from "@/components/OrderSample/OrderSample";
+import LinkComponent from "@/components/UI/link/LinkComponent";
 
 interface FilterOption {
 	name: string;
@@ -126,29 +127,30 @@ export default function FilterCatalog({
 					</div>
 
 					<div className={styles.contacts__wrapper}>
-						<a
+						<LinkComponent
 							href="tel:+790169000907"
 							type="tel"
 							className={styles.phoneNumber}
+                            white
 						>
 							+790169000907
-						</a>
+						</LinkComponent>
 
-						<a href="https://wa.me/790169000907" className={styles.social_link}>
+						<LinkComponent href="https://wa.me/790169000907" className={styles.social_link}>
 							<Image
 								src={icon_wa}
 								alt="What's app"
 								className={styles.social_icon}
 							/>
-						</a>
+						</LinkComponent>
 
-						<a href="https://t.me/tekstilnoyepolotno" className={styles.social_link}>
+						<LinkComponent href="https://t.me/tekstilnoyepolotno" className={styles.social_link}>
 							<Image
 								src={icon_tg}
 								alt="Telegram"
 								className={styles.social_icon}
 							/>
-						</a>
+						</LinkComponent>
 
 						<button onClick={() => setPopup(true)} className={styles.social_link}>
 							<Image

@@ -3,6 +3,7 @@ import styles from "./Partnership.module.css";
 import Image from "next/image";
 import icon__wa from "@/assets/media/partnership-block/wa.png";
 import icon__tg from "@/assets/media/partnership-block/tg.png";
+import LinkComponent from "../UI/link/LinkComponent";
 
 export default function PartnershipBlock() {
 	const pointsList = [
@@ -38,23 +39,27 @@ export default function PartnershipBlock() {
 						</div>
 
 						<div className={styles.btns__wrapper}>
-							<a href="https://wa.me/790169000907" className={styles.socialBtn}>
-								WhatsApp-chat
-								<Image
-									src={icon__wa}
-									alt=""
-									className={styles.btn__icon}
-								/>
-							</a>
+							<LinkComponent href="https://wa.me/790169000907">
+								<button  className={styles.socialBtn}>
+								    WhatsApp-chat
+    								<Image
+    									src={icon__wa}
+    									alt=""
+    									className={styles.btn__icon}
+    								/>
+								</button>
+							</LinkComponent>
 
-							<a href="https://t.me/tekstilnoyepolotno" className={styles.socialBtn}>
-								Telegram-kanal
-								<Image
-									src={icon__tg}
-									alt=""
-									className={styles.btn__icon}
-								/>
-							</a>
+							<LinkComponent href="https://t.me/tekstilnoyepolotno">
+								<button className={styles.socialBtn}>
+								    Telegram-kanal
+    								<Image
+    									src={icon__tg}
+    									alt=""
+    									className={styles.btn__icon}
+    								/>
+								</button>
+							</LinkComponent>
 						</div>
 					</div>
 				</div>

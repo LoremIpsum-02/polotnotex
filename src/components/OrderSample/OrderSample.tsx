@@ -8,11 +8,13 @@ import { useRouter } from "next/navigation";
 
 interface Props {
 	fabricName?: string;
+    fabricId?: string | number,
 }
 
-export default function OrderSample({ fabricName }: Props) {
+export default function OrderSample({ fabricName, fabricId }: Props) {
 	const [formData, setFormData] = useState({
-		tel: ``,
+        fabricId: fabricId || '-',
+		phoneNumber: ``,
 		name: ``,
 		comment: ``,
 	});
@@ -30,7 +32,7 @@ export default function OrderSample({ fabricName }: Props) {
 			body: JSON.stringify({
 				billing: {
 					first_name: formData.name,
-					phone: formData.tel,
+					phone: formData.phoneNumber,
 					email: "test@example.com", // WooCommerce requires an email
 				},
 				meta_data: [
@@ -63,11 +65,11 @@ export default function OrderSample({ fabricName }: Props) {
 					<div className={styles.inputs__wrapper}>
 						<SiteInput
 							var2
-							value={formData.tel}
+							value={formData.phoneNumber}
 							onChange={(e) =>
 								setFormData({
 									...formData,
-									tel: e.target.value,
+									phoneNumber: e.target.value,
 								})
 							}
 							placeholder="Телефон"

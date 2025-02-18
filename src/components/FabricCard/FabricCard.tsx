@@ -113,6 +113,7 @@ export default function FabricCard({ fabric_id }: FabricCardProps) {
 
 						<OrderSample
 							fabricName={`${fabricData?.type} ${fabricData?.subtype} ${fabricData?.density}, ${currentVariation?.color}`}
+                            fabricId={fabric_id}
 						/>
 					</Popup>
 
