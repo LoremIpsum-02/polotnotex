@@ -1,8 +1,10 @@
 .linkComponent{
     width: 100%;
     max-width: 200px;
+    text-align: center;
+    color: var(--text);
 }
 
 .white{
-    color: var(--c3);
+    color: var(--c3) !important;
 }

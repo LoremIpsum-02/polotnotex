@@ -75,6 +75,10 @@
     white-space: nowrap;
 }
 
+.returnBack__btn{
+    white-space: nowrap;
+}
+
 .logo {
 	margin-top: -65%;
 	width: clamp(
@@ -230,8 +234,9 @@
 		border-radius: 0 0 30px 30px;
 	}
 	.header__contentWrapper .call_btn,
+	.header__contentWrapper .call_icon,
 	.header__contentWrapper .phoneNumber,
-	.header__contentWrapper .text__wrapper {
+	.header__contentWrapper .text__wrapper{
 		display: none;
 	}
 	.header__inner {
@@ -244,7 +249,7 @@
         width: 100%;
 	}
     .menuBtns__wrapper{
-        gap: 30px;
+        gap: 20px;
     }
     .menu_btn::after{
         right: -20%;
@@ -262,6 +267,9 @@
 		padding: 15px 15px 30px;
         gap: 20px;
 	}
+    .mob__iconsContainer *{
+        color: var(--text);
+    }
 	.phoneNumber {
 		color: var(--c1);
 	}

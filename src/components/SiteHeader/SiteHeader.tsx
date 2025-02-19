@@ -82,7 +82,7 @@ export default function SiteHeader({
 						href="tel:+790169000907"
 						type="tel"
 					>
-						+790169000907
+						<p className={styles.text}>+790169000907</p>
 					</LinkComponent>
 
 					<p className={styles.text}>Ткань оптом для пошива одежды</p>
@@ -210,7 +210,7 @@ export default function SiteHeader({
 										</div>
 									</div>
 								) : (
-									<button onClick={() => returnBack()}>
+									<button onClick={() => returnBack()} className={styles.returnBack__btn}>
                                         Вернуться на главную
                                     </button>
 								)}

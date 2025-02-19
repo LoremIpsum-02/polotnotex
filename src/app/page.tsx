@@ -106,9 +106,9 @@ export default function Home() {
 		},
 	];
 
-    // useEffect(() => {
-    //     console.log(getSocialLinks())
-    // }, [])
+    useEffect(() => {
+        // console.log(`${process.env.NEXT_PUBLIC_WC_API_URL}`)
+    }, [])
 
 	return (
 		<>
