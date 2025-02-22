@@ -218,6 +218,7 @@ export default function SiteHeader({
 								<LinkComponent
 									href="tel:+790169000907"
 									type="tel"
+                                    white
 								>
 									+790169000907
 								</LinkComponent>

@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
 	experimental: {
 		workerThreads: false,
 		cpus: 1,
+        webpackMemoryOptimizations: true,
 	},
 	images: {
 		remotePatterns: [
@@ -13,6 +14,7 @@ const nextConfig: NextConfig = {
 				pathname: "/wp-content/uploads/**",
 			},
 		],
+        unoptimized: true,
 	},
 	output: "standalone",
 	eslint: {

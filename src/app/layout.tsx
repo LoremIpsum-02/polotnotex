@@ -3,6 +3,7 @@ import "./globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
+import Script from "next/script";
 
 export const metadata: Metadata = {
 	title: "Polotnotex",
@@ -40,6 +41,25 @@ export default function RootLayout({
 			lang="en"
 			className={[nk133.className, involve.className].join(" ")}
 		>
+			<head>
+				{/* Google Analytics */}
+				<Script
+					strategy="afterInteractive"
+					src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX`}
+				/>
+				<Script
+					id="google-analytics"
+					strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXX');
+            `,
+					}}
+				/>
+			</head>
 			<body>
 				<div className="mainContainer">
 					<main className="main">{children}</main>

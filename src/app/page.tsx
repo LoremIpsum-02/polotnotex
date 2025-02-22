@@ -17,9 +17,16 @@ import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
 import { RefObject, useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter/SiteFooter";
-import getSocialLinks from "@/hooks/getLinks";
+import { usePathname } from "next/navigation";
+import { pageview } from "@/lib/gtag";
 
 export default function Home() {
+    const pathname = usePathname()
+	useEffect(() => {
+		if(pathname)
+            pageview(pathname)
+	}, [pathname]);
+
 	const [preselectedFilter, setPreselectedFilter] = useState({
 		type: "all",
 		subtypes: [],
@@ -106,9 +113,9 @@ export default function Home() {
 		},
 	];
 
-    useEffect(() => {
-        // console.log(`${process.env.NEXT_PUBLIC_WC_API_URL}`)
-    }, [])
+	useEffect(() => {
+		// console.log(`${process.env.NEXT_PUBLIC_WC_API_URL}`)
+	}, []);
 
 	return (
 		<>

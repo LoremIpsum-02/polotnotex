@@ -6,8 +6,6 @@ import { RefObject, useEffect, useState } from "react";
 import FilterCatalog from "./FilterCatalog/FilterCatalog";
 import { catalog_fabricDescriptions, fabricList } from "@/actions";
 import CatalogItem from "./CatalogItem/CatalogItem";
-import Image from "next/image";
-import arrow__showAll from "@/assets/media/catalog/show-all-block/arrow-down.png";
 
 interface FilterOption {
 	type: string;
@@ -132,7 +130,7 @@ export default function CatalogFabric({
 	}
 
 	useEffect(() => {
-		getProducts();
+		// getProducts();
 	}, []);
 
 	useEffect(() => {
@@ -176,19 +174,6 @@ export default function CatalogFabric({
 									/>
 								))}
 						</div>
-
-						{/* <button className={styles.showAll__container}>
-                            <div className={styles.showAll__text}>
-                                <p>
-                                    Смотреть все ткани:{" "}
-                                </p>
-                                {filterOption.type == 'all' ? 'Все ткани' : filterOption.type}
-                            </div>
-
-                            <hr className={styles.showAll__line} />
-
-                            <Image src={}
-                        </button> */}
 					</div>
 				) : (
 					<h1 className={styles.title__noProducts}>

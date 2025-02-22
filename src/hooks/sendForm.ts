@@ -24,13 +24,13 @@ export default async function sendForm(formData: any) {
     		meta_data: [
     			{
     				key: "comment",
-    				value: formData.email,
+    				value: form.comment,
     			},
     		],
     		line_items: [], // Add products if needed
     	}),
     });
 
-    const data = await response.json();
-    console.log(data)
+    const data = await response.json()
+    console.log(data);
 }
