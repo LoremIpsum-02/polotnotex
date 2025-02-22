@@ -130,7 +130,7 @@ export default function CatalogFabric({
 	}
 
 	useEffect(() => {
-		// getProducts();
+		getProducts();
 	}, []);
 
 	useEffect(() => {
