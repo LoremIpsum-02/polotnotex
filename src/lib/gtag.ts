@@ -1,3 +1,10 @@
+// Extend the Window type to include gtag
+declare global {
+	interface Window {
+		gtag: (...args: any[]) => void;
+	}
+}
+
 export const GA_TRACKING_ID = process.env.G_TAG;
 
 // Only trigger events if GA is available
