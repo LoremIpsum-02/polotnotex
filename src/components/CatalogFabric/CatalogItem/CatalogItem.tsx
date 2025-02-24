@@ -5,10 +5,7 @@ import styles from "./CatalogItem.module.css";
 import Image from "next/image";
 import icon__eye from "@/assets/media/fabricCards/eye-icon.png";
 import Link from "next/link";
-import Popup from "@/components/UI/popup/Popup";
 import { useEffect, useState } from "react";
-import FabricCard from "@/components/FabricCard/FabricCard";
-import OrderSample from "@/components/OrderSample/OrderSample";
 import buyIcon from "@/assets/media/catalog/buy-icon.png";
 import noImage from "@/assets/media/no-image.jpg";
 import icon__tooltip from "@/assets/media/fabricCards/tooltip-icon.png";
@@ -28,11 +25,12 @@ interface FabricItem {
 
 interface Props {
 	fabricItem: FabricItem;
+    showPopup: (arg: boolean) => void,
+    showForm: (arg: boolean) => void,
+    setCurrentProduct: (arg: FabricItem) => void,
 }
 
-export default function CatalogItem({ fabricItem }: Props) {
-	const [showFabricPopup, setShowFabricPopup] = useState<boolean>(false);
-	const [showOrderSample, setShowOrderSample] = useState<boolean>(false);
+export default function CatalogItem({ fabricItem, showPopup, showForm, setCurrentProduct }: Props) {
 	const [currentPreview, setCurrentPreview] = useState(0);
 	const [isHovering, setIsHovering] = useState(false);
 
@@ -49,20 +47,6 @@ export default function CatalogItem({ fabricItem }: Props) {
 
 	return (
 		<>
-			<Popup show={showFabricPopup} setShow={setShowFabricPopup}>
-				<FabricCard fabric_id={fabricItem.id} />
-			</Popup>
-
-			<Popup show={showOrderSample} setShow={setShowOrderSample}>
-				<h4>ЗАКАЗАТЬ ОБРАЗЕЦ ТКАНИ</h4>
-
-				<OrderSample
-					fabricName={`
-                    ${fabricItem.type} ${fabricItem.subtype} ${fabricItem.density}, ${fabricItem.colors[0]}
-                `}
-				/>
-			</Popup>
-
 			<div
 				className={styles.card}
 				onMouseEnter={() => setIsHovering(true)}
@@ -109,8 +93,9 @@ export default function CatalogItem({ fabricItem }: Props) {
 
 							<button
 								className={styles.popup__btn}
-								onClick={(e) => {
-									setShowFabricPopup(!showFabricPopup);
+								onClick={() => {
+                                    setCurrentProduct(fabricItem)
+									showPopup(true);
 								}}
 							>
 								<Image
@@ -177,7 +162,10 @@ export default function CatalogItem({ fabricItem }: Props) {
 
 					<button
 						className={styles.orderSample__btn}
-						onClick={(e) => setShowOrderSample(!showOrderSample)}
+						onClick={() => {
+                            setCurrentProduct(fabricItem)
+                            showForm(true)
+                        }}
 					>
 						Заказать образец ткани
 					</button>

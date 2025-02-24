@@ -1,17 +1,22 @@
 export async function fetchVariations(productId: number | string) {
-	const response = await fetch(`/api/fabricVariations/${productId}`)
+	try {
+		const response = await fetch(`/api/fabricVariations/${productId}`);
 
-	if (!response.ok) {
-		throw new Error("Failed to fetch variations");
+		if (response) {
+			if (!response.ok) {
+				throw new Error("Failed to fetch variations");
+			} else {
+				const variations = await response.json();
+				return variations.map((variation: any) => ({
+					id: variation.id,
+					color: variation.attributes.цвет || "Default",
+					images: variation.additional_images,
+				}));
+			}
+		} else return;
+	} catch (error: any) {
+		throw new Error("Fetch variations error : ", error);
 	}
-
-    const variations = await response.json();
-    return variations.map((variation: any) => (
-        {
-        id: variation.id,
-        color: variation.attributes.цвет || "Default",
-        images: variation.additional_images,
-    }));
 }
 
 // Catalog data
@@ -30,14 +35,28 @@ export async function fabricList() {
 					id: product.id,
 					type: product.categories[0]?.name,
 					subtype: product.tags[0]?.name,
-					density: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'плотность')?.options,
-					colors: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'цвет')?.options,
-					composition: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'состав')?.options,
-					width: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'ширина')?.options,
+					density: product.attributes?.find(
+						(attr: any) => attr.name.toLowerCase() == "плотность"
+					)?.options,
+					colors: product.attributes?.find(
+						(attr: any) => attr.name.toLowerCase() == "цвет"
+					)?.options,
+					composition: product.attributes?.find(
+						(attr: any) => attr.name.toLowerCase() == "состав"
+					)?.options,
+					width: product.attributes?.find(
+						(attr: any) => attr.name.toLowerCase() == "ширина"
+					)?.options,
 					price: `${product.price}₽`,
-					availability: product.stock_status === "instock" ? "В наличии" : "Под заказ",
+					availability:
+						product.stock_status === "instock"
+							? "В наличии"
+							: "Под заказ",
 					images: product.images || [],
-					countryOrigin: product.attributes?.find((attr: any) => attr.name.toLowerCase() == 'страна-производитель')?.options,
+					countryOrigin: product.attributes?.find(
+						(attr: any) =>
+							attr.name.toLowerCase() == "страна-производитель"
+					)?.options,
 					description: product.description,
 					variations,
 				};
@@ -130,16 +149,14 @@ export function fabricDescriptions() {
 	return [
 		{
 			fabricName: "Флис",
-			fabricDescription:
-				`Флисовая ткань по оптовым ценам от производителя. В текстильном деле широкое распространение получила флисовая ткань. Из этого материала шьют повседневную и спортивную одежду, текстиль для дома и мебели. Производствам как крупного, так и мелкого звеньев будет полезно обратить внимание на это сырье. В статье пойдет речь о том,  что это за материал, какие у него плюсы и минусы, его разновидностях. Также здесь рассказывается об особенностях обработки материала и сфере его применения.
+			fabricDescription: `Флисовая ткань по оптовым ценам от производителя. В текстильном деле широкое распространение получила флисовая ткань. Из этого материала шьют повседневную и спортивную одежду, текстиль для дома и мебели. Производствам как крупного, так и мелкого звеньев будет полезно обратить внимание на это сырье. В статье пойдет речь о том,  что это за материал, какие у него плюсы и минусы, его разновидностях. Также здесь рассказывается об особенностях обработки материала и сфере его применения.
                 Флисовая ткань по оптовым ценам от производителя. В текстильном деле широкое распространение получила флисовая ткань. Из этого материала шьют повседневную и спортивную одежду, текстиль для дома и мебели. Производствам как крупного, так и мелкого звеньев будет полезно обратить внимание на это сырье. В статье пойдет речь о том,  что это за материал, какие у него плюсы и минусы, его разновидностях. Также здесь рассказывается об особенностях обработки материала и сфере его применения.
                 Флисовая ткань по оптовым ценам от производителя. В текстильном деле широкое распространение получила флисовая ткань. Из этого материала шьют повседневную и спортивную одежду, текстиль для дома и мебели. Производствам как крупного, так и мелкого звеньев будет полезно обратить внимание на это сырье. В статье пойдет речь о том,  что это за материал, какие у него плюсы и минусы, его разновидностях. Также здесь рассказывается об особенностях обработки материала и сфере его применения.
                 `,
 		},
 		{
 			fabricName: "ФУтер",
-			fabricDescription:
-				`Ткань футер по оптовым ценам от производителя. Футер - один из самых деликатных хлопковых материалов. Мягкий, согревающий в холода, приятный к телу, он получил множество положительных отзывов. Разнообразие состава и вариативные техники плетения обусловили появление на текстильном рынке множество видов, которые используют для пошива разных изделий.
+			fabricDescription: `Ткань футер по оптовым ценам от производителя. Футер - один из самых деликатных хлопковых материалов. Мягкий, согревающий в холода, приятный к телу, он получил множество положительных отзывов. Разнообразие состава и вариативные техники плетения обусловили появление на текстильном рынке множество видов, которые используют для пошива разных изделий.
                 Ткань футер по оптовым ценам от производителя. Футер - один из самых деликатных хлопковых материалов. Мягкий, согревающий в холода, приятный к телу, он получил множество положительных отзывов. Разнообразие состава и вариативные техники плетения обусловили появление на текстильном рынке множество видов, которые используют для пошива разных изделий.
                 Ткань футер по оптовым ценам от производителя. Футер - один из самых деликатных хлопковых материалов. Мягкий, согревающий в холода, приятный к телу, он получил множество положительных отзывов. Разнообразие состава и вариативные техники плетения обусловили появление на текстильном рынке множество видов, которые используют для пошива разных изделий.
                 `,

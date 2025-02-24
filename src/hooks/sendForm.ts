@@ -8,8 +8,6 @@ export default async function sendForm(formData: any) {
         price_availability: formData.price_availability ? 'Нужен' : "НЕ нужен",
     }
 
-    console.log("Send form : ", form)
-
     const response = await fetch("/api/proxy", {
     	method: "POST",
     	headers: {
@@ -32,5 +30,4 @@ export default async function sendForm(formData: any) {
     });
 
     const data = await response.json()
-    console.log(data);
 }

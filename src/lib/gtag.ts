@@ -8,9 +8,6 @@ declare global {
 
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_G_TAG || "";
 
-console.log("GA ID:", GA_TRACKING_ID);
-console.log("Env Variable:", process.env.NEXT_PUBLIC_G_TAG);
-
 // ✅ Store GA_TRACKING_ID in `window`
 if (typeof window !== "undefined") {
 	window.GA_TRACKING_ID = GA_TRACKING_ID;
@@ -18,7 +15,6 @@ if (typeof window !== "undefined") {
 
 // Only trigger events if GA is available
 export const pageview = (url: string) => {
-	console.log("📡 Sending GA Pageview:", url); // Debugging log
 	if (typeof window !== "undefined" && window.gtag) {
 		window.gtag("config", GA_TRACKING_ID, {
 			page_path: url,
@@ -40,7 +36,6 @@ export const event = ({
 	value?: number;
 }) => {
 	if (typeof window !== "undefined" && window.gtag) {
-		console.log("GA Event:", { action, category, label, value }); // ✅ Debugging log
 		window.gtag("event", action, {
 			event_category: category,
 			event_label: label,

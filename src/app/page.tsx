@@ -15,17 +15,14 @@ import OurCompanyBlock from "@/components/OurCompanyBlock/OurCompanyBlock";
 import FabricDescription from "@/components/FabricDescription/FabricDescription";
 import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter/SiteFooter";
 import { usePathname } from "next/navigation";
 import { pageview } from "@/lib/gtag";
+import { fetchSEOData } from "@/lib/fetchSEOData";
 
 export default function Home() {
-    const pathname = usePathname()
-	useEffect(() => {
-		if(pathname)
-            pageview(pathname)
-	}, [pathname]);
+	const pathname = usePathname();
 
 	const [preselectedFilter, setPreselectedFilter] = useState({
 		type: "all",
@@ -113,12 +110,9 @@ export default function Home() {
 		},
 	];
 
-	useEffect(() => {
-		// console.log(`${process.env.NEXT_PUBLIC_WC_API_URL}`)
-	}, []);
-
 	return (
 		<>
+
 			<div className={styles.page}>
 				<SiteHeader
 					selectFabric={setPreselectedFilter}
