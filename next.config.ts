@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
 				pathname: "/wp-content/uploads/**",
 			},
 		],
-        unoptimized: true,
+        unoptimized: false,
 	},
 	output: "standalone",
 	eslint: {
