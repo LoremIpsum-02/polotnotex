@@ -15,11 +15,9 @@ import OurCompanyBlock from "@/components/OurCompanyBlock/OurCompanyBlock";
 import FabricDescription from "@/components/FabricDescription/FabricDescription";
 import SupportBlock from "@/components/SupportBlock/SupportBlock";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SiteFooter from "@/components/SiteFooter/SiteFooter";
 import { usePathname } from "next/navigation";
-import { pageview } from "@/lib/gtag";
-import { fetchSEOData } from "@/lib/fetchSEOData";
 
 export default function Home() {
 	const pathname = usePathname();
