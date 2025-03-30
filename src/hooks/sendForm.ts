@@ -25,7 +25,7 @@ export default async function sendForm(formData: any) {
     				value: form.comment,
     			},
     		],
-    		line_items: [], // Add products if needed
+    		line_items: [], // products if needed
     	}),
     });
 

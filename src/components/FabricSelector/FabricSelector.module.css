@@ -141,7 +141,7 @@
     color: var(--c1);
     font-size: 1.125rem;
     font-weight: 600;
-
+    font-family: 'Involve', sans-serif;
 }
 .description__text{
     font-size: 1.125rem;

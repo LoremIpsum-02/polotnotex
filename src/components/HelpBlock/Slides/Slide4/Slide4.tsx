@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import styles from "./Slide4.module.css";
 
@@ -9,16 +9,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Slide4() {
-    const router = useRouter(
+	const router = useRouter();
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		tel: "",
+	});
 
-    )
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        tel: '',
-    })
-
-    async function sendForm() {
+	async function sendForm() {
 		const response = await fetch("/api/proxy", {
 			method: "POST",
 			headers: {
@@ -48,8 +46,8 @@ export default function Slide4() {
 			tel: "",
 		});
 
-        localStorage.setItem('thankReason', 'form')
-        router.replace('/thank-you')
+		localStorage.setItem("thankReason", "form");
+		router.replace("/thank-you");
 	}
 
 	return (
@@ -62,7 +60,7 @@ export default function Slide4() {
 				</p>
 
 				<div className={styles.warningTitle__wrapper}>
-					<h2>внимание</h2>
+					<h2>Внимание</h2>
 
 					<p className={styles.subtitle}>
 						Все предложения, связанные с быстротой поставки ткани,
@@ -79,24 +77,64 @@ export default function Slide4() {
 						ПОДБОРУ ТКАНИ
 					</p>
 
-					<form action="#" className={styles.form} onSubmit={(e) => {
-                        e.preventDefault()
-                        sendForm()
-                    }}>
-						<SiteInput placeholder="Имя" type="text" value={formData.name}  onChange={e => setFormData({...formData, name: e.target.value})} />
-						<SiteInput placeholder="Эл. почта" type="email" value={formData.email}  onChange={e => setFormData({...formData, email: e.target.value})} />
-						<SiteInput placeholder="Тел" type="tel" value={formData.tel}  onChange={e => setFormData({...formData, tel: e.target.value})} />
-						<SiteBtn>Смотреть все</SiteBtn>
-					</form>
+					<form
+						action="#"
+						className={styles.form}
+						onSubmit={(e) => {
+							e.preventDefault();
+							sendForm();
+						}}
+					>
+						<div className={styles.form__inner}>
+						    <SiteInput
+    							placeholder="Имя"
+    							type="text"
+    							value={formData.name}
+    							onChange={(e) =>
+    								setFormData({
+    									...formData,
+    									name: e.target.value,
+    								})
+    							}
+    							required
+    						/>
+    						<SiteInput
+    							placeholder="Эл. почта"
+    							type="email"
+    							value={formData.email}
+    							onChange={(e) =>
+    								setFormData({
+    									...formData,
+    									email: e.target.value,
+    								})
+    							}
+    							required
+    						/>
+    						<SiteInput
+    							placeholder="Тел"
+    							type="tel"
+    							value={formData.tel}
+    							onChange={(e) =>
+    								setFormData({
+    									...formData,
+    									tel: e.target.value,
+    								})
+    							}
+    							required
+    						/>
+    						<SiteBtn type="submit">Смотреть все</SiteBtn>
+						</div>
 
-					<FormPolicyAgreement />
+						<FormPolicyAgreement />
+					</form>
 				</div>
 
 				<p className={styles.subtitle}>
-					Данный блок полностью посвящен условиям сотрудничества.
-					Главным факторам качественного сервиса по продажам ткани вы
-					считаете - когда стороны закрепили ответственных лиц, и
-					указали наиболее удобную форму для переписки.
+					Наша компания предлагает высококачественную поставку тканей
+					оптом для пошива. Мы обеспечиваем прямые поставки тканей на
+					склад, что гарантирует оптимальные цены и быструю обработку
+					заказов. Прямые поставки тканей оптом от производителя
+					позволят вам сократить затраты и расширить ассортимент.
 				</p>
 			</div>
 		</>

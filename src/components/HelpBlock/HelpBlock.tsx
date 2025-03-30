@@ -21,15 +21,15 @@ interface Props {
 export default function HelpBlock({ currentSlide, targetRef, setCurrentSlide }: Props) {
 	const slidersList = [
 		{
-			sliderBtn: "С ЧЕГО НАЧАТЬ",
+			sliderBtn: "Прямой поставщик тканей оптом",
 			component: <Slide1 />,
 		},
 		{
-			sliderBtn: "ОПТОВЫЙ ОТДЕЛ",
+			sliderBtn: "Купить ткани по оптовым ценам ",
 			component: <Slide2 />,
 		},
 		{
-			sliderBtn: "БРОНЬ И ЗАКУПКА",
+			sliderBtn: "Закупка ткани оптом для пошива",
 			component: <Slide3 />,
 		},
 		{

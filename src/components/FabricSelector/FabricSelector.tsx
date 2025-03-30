@@ -62,13 +62,13 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
 		},
 	];
 
-    const [formData, setFormData] = useState({
-        tel: '',
-    })
+	const [formData, setFormData] = useState({
+		tel: "",
+	});
 
-    const router = useRouter()
+	const router = useRouter();
 
-    async function sendForm() {
+	async function sendForm() {
 		const response = await fetch("/api/proxy", {
 			method: "POST",
 			headers: {
@@ -86,9 +86,9 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
 
 		const data = await response.json();
 
-        localStorage.setItem('thankReason', "form")
-        router.push("/thank-you")
-    }
+		localStorage.setItem("thankReason", "form");
+		router.push("/thank-you");
+	}
 
 	return (
 		<>
@@ -146,58 +146,83 @@ export default function FabricSelector({ selectFabric, productsRef }: Props) {
 						</div>
 
 						<div className={styles.fabricDelivery__container}>
-							<h2>Доставка ткани от производителЯ на склад</h2>
+							<h2>Каталог тканей для пошива</h2>
 
 							<div className={styles.fabricDelivery__text}>
 								<p>
-									Покупайте качественную ткань оптом от
-									производителя по оптовой цене. Обеспечим вас
-									широким выбором тканей высокого качества, а
-									собственный склад позволит оперативно
-									доставить заказы.
+									В нашем интернет-магазине представлен
+									каталог тканей. Мы предлагаем разнообразные
+									ткани для пошива одежды, постельного белья,
+									а также для мебели. Каждая ткань обладает
+									высокой прочностью и долговечностью, что
+									гарантирует качественный итоговый продукт.
 								</p>
 								<br />
-								Мы гарантируем быструю доставку ткани по оптовой
-								цене. Индивидуальный подход к каждому клиенту.
-								Сотрудничая с нами, вы получите качественную
-								ткань в срок, при бронировании, или на нашем
-								складе контейнерных поставок ткани.
+								<p>
+									Заказать ткани оптом на нашем сайте стало
+									проще простого. Удобный интерфейс позволяет
+									быстро находить нужные материалы и оформлять
+									заказ в несколько кликов. Мы ценим своих
+									клиентов и гарантируем высокое качество
+									продукции.
+								</p>
 							</div>
 
 							<div className={styles.fabricDelivery__formWrapper}>
 								<h2>бронь & консУльтациЯ</h2>
 
-								<form action="#" className={styles.form} onSubmit={(e) => {
-                                    e.preventDefault()
-                                    sendForm()
-                                    }}>
-                                        <div className={styles.form__inner}>
-                                            
-    									<SiteInput var2 placeholder="Тел" value={formData.tel} onChange={e => setFormData({tel: e.target.value})} />
-    									<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
-                                        </div>
-                                        <FormPolicyAgreement />
+								<form
+									action="#"
+									className={styles.form}
+									onSubmit={(e) => {
+										e.preventDefault();
+										sendForm();
+									}}
+								>
+									<div className={styles.form__inner}>
+										<SiteInput
+											var2
+											placeholder="Тел"
+											value={formData.tel}
+											onChange={(e) =>
+												setFormData({
+													tel: e.target.value,
+												})
+											}
+										/>
+										<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+									</div>
+									<FormPolicyAgreement />
 								</form>
-
 							</div>
 						</div>
 					</div>
 
 					<div className={styles.description__wrapper}>
-						<h3 className={styles.description__title}>
+						<h2 className={styles.description__title}>
 							ОПТОВЫЕ ПОСТАВКИ ТКАНИ ИЗ КИТАЯ, ТУРЦИИ И
 							УЗБЕКИСТАНА
-						</h3>
+						</h2>
 
 						<p className={styles.description__text}>
-							Особенность наших поставок ткани оптом, заключается
-							в том, что мы не просто работаем по договорам с
-							конкретными производителям ткани. Но и в том, что
-							основным из условия является постоянство качества и
-							цветов. Ткань по качеству и цвету всегда одинаковая.
-							Каждая партия ткани отгружается из Китая, Турции или
-							Узбекистана в контейнер по строгим технологическим
-							стандартам хранения и доставки.
+							Наш интернет-магазин предлагает оптовые поставки
+							ткани из Китая, Турции и Узбекистана, предоставляя
+							нашим клиентам качественный материал для различных
+							нужд. У нас вы найдете широкий ассортимент
+							трикотажного полотна, постельного и мебельного
+							текстиля от проверенных производителей, которые
+							зарекомендовали себя на рынке. Мы понимаем важность
+							надежной и своевременной доставки, поэтому
+							обеспечиваем быструю и безопасную логистику, что
+							делает наше сотрудничество максимально комфортным.
+							Наши оптовые предложения позволяют вам извлечь
+							выгоду от доступных цен, что особенно важно для тех,
+							кто занимается пошивом одежды или производством
+							мебельных изделий. Задействуя наш опыт, вы можете
+							уверенно развивать свой бизнес и оставаться на шаг
+							впереди конкурентов, используя качественные ткани из
+							стабильных источников, таких как китайские, турецкие
+							и узбекские производители.
 						</p>
 					</div>
 				</div>
