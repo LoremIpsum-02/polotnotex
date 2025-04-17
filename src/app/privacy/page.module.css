@@ -1,0 +1,28 @@
+.privacyPolicy{
+	padding: 30px 0;
+}
+
+.privacyPolicy *{
+	color: #000;
+	font-family: "Roboto", sans-serif;
+}
+
+.mainTitle{
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.point_title{
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.text{
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.privacyPolicy a{
+	text-decoration: underline;
+	color: blue;
+}

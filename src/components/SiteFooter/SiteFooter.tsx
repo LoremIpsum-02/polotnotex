@@ -5,6 +5,7 @@ import picture from "@/assets/media/footer/picture.png";
 import logo from "@/assets/media/logo/logo_header.png";
 import decoration from "@/assets/media/decoration.png";
 import { RefObject } from "react";
+import Link from "next/link";
 
 interface Props {
 	targetRef?: RefObject<HTMLDivElement>;
@@ -49,6 +50,10 @@ export default function SiteFooter({ targetRef }: Props) {
 
 							<div className={styles.contact__point}>
 								КПП 5567890964
+							</div>
+
+							<div className={styles.contact__point}>
+								<Link href={"/privacy"}>Политика конфиденциальности</Link>
 							</div>
 						</div>
 					</div>

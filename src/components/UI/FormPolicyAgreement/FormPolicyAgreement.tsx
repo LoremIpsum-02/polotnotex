@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./FormPolicyAgreement.module.css";
 
 export default function FormPolicyAgreement(props: any) {
@@ -13,9 +14,9 @@ export default function FormPolicyAgreement(props: any) {
 				/>
 				<label className={styles.text}>
 					Нажимая на кнопку “Отправить заявку”, вы соглашаетесь с{" "}
-					<a href="#" className={styles.policy__link}>
+					<Link href="/privacy" className={styles.policy__link}>
 						политикой конфиденциальности
-					</a>
+					</Link>
 				</label>
 			</div>
 		</>
