@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import ym from "react-yandex-metrika";
 
 export default function YandexMetrika() {
 	const pathname = usePathname();
@@ -9,7 +10,7 @@ export default function YandexMetrika() {
 
 	useEffect(() => {
 		const url = `${pathname}?${searchParams}`;
-		ym(100763687, "hit", url);
+		ym("100763687", "hit", url);
 	}, [pathname, searchParams]);
 
 	return null;
