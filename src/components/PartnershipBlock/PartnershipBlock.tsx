@@ -4,6 +4,7 @@ import Image from "next/image";
 import icon__wa from "@/assets/media/partnership-block/wa.png";
 import icon__tg from "@/assets/media/partnership-block/tg.png";
 import LinkComponent from "../UI/link/LinkComponent";
+import { useSocialLink } from "@/hooks/useSocialLink";
 
 export default function PartnershipBlock() {
 	const pointsList = [
@@ -11,6 +12,10 @@ export default function PartnershipBlock() {
 		"ПРЯМАМЯ ПОКУПКА ТКАНИ И БРОНИРОВАНИЕ",
 		"ФОТО И ВИДЕО ОБЗОРЫ НА ПОСТАВЛЯЕМУЮ ТКАНЬ",
 	];
+
+	// Contacts
+	const link_wa = useSocialLink("whatsapp")
+	const link_tg = useSocialLink("telegram")
 
 	return (
 		<>
@@ -39,7 +44,7 @@ export default function PartnershipBlock() {
 						</div>
 
 						<div className={styles.btns__wrapper}>
-							<LinkComponent href="https://wa.me/790169000907">
+							<LinkComponent href={link_wa?.url}>
 								<button  className={styles.socialBtn}>
 								    WhatsApp-chat
     								<Image
@@ -50,7 +55,7 @@ export default function PartnershipBlock() {
 								</button>
 							</LinkComponent>
 
-							<LinkComponent href="https://t.me/tekstilnoyepolotno">
+							<LinkComponent href={link_tg?.url}>
 								<button className={styles.socialBtn}>
 								    Telegram-kanal
     								<Image

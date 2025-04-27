@@ -3,6 +3,7 @@
     max-width: 200px;
     text-align: center;
     color: var(--text);
+	white-space: nowrap;
 }
 
 .white{

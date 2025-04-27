@@ -1,23 +1,47 @@
+// components/SiteHeader/SiteHeader.tsx
+
 "use client";
 
 import styles from "./SiteHeader.module.css";
 
-import React, { RefObject, useState } from "react";
+// Essentials
+import React, { RefObject, useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+// Assets
 import Logo from "@/assets/media/logo/logo_header.png";
 import phoneIcon from "@/assets/media/header/phone_icon.png";
 import icon_wa from "@/assets/media/header/socials/whatsapp.png";
 import icon_tg from "@/assets/media/header/socials/tg.png";
 import icon_mail from "@/assets/media/header/socials/mail.png";
-import Popup from "../UI/popup/Popup";
-import OrderSample from "../OrderSample/OrderSample";
-import { useRouter } from "next/navigation";
-import LinkComponent from "../UI/link/LinkComponent";
+
+// Components
+import Popup from "@/components/UI/popup/Popup";
+import OrderSample from "@/components/OrderSample/OrderSample";
+import LinkComponent from "@/components/UI/link/LinkComponent";
+import Link from "next/link";
+import { usePhoneNumber } from "@/hooks/usePhoneNumber";
+import { useSocialLink } from "@/hooks/useSocialLink";
+
+interface MenuInfoItem {
+	name: string;
+	handleClick: () => void;
+}
 
 interface Props {
-	selectFabric?: (arg: any) => void;
+	selectFabric?: (arg: {
+		type: string;
+		subtypes: string[];
+		availability: any[];
+	}) => void;
 	productsRef?: RefObject<HTMLDivElement>;
-	menu__info?: any;
+	menu__info?: MenuInfoItem[];
+}
+
+interface SocialLink {
+	name: string;
+	url: string;
 }
 
 export default function SiteHeader({
@@ -62,48 +86,65 @@ export default function SiteHeader({
 
 	const router = useRouter();
 
-    function returnBack(){
-        localStorage.removeItem("thankReason")
-        router.replace("/")
-    }
+	function returnBack() {
+		localStorage.removeItem("thankReason");
+		router.replace("/");
+	}
+
+	const primaryPhone = usePhoneNumber("primary");
+	const link_wa = useSocialLink("whatsapp");
+	const link_tg = useSocialLink("telegram");
 
 	return (
 		<>
 			<Popup show={popup} setShow={setPopup}>
 				<OrderSample />
 			</Popup>
+
+			{/* Header */}
 			<header className={styles.header}>
+				{/* Mobile text container */}
 				<div className={styles.mob__textContainer}>
 					<p className={styles.text}>
 						Открыто с 8.00 до 19.00 (Пн-Пт)
 					</p>
 
+					{/* Phone number link */}
 					<LinkComponent
-						href="tel:+790169000907"
+						href={`tel:${primaryPhone?.number}`}
 						type="tel"
 					>
-						<p className={styles.text}>+790169000907</p>
+						<p className={styles.text}>{primaryPhone?.display}</p>
 					</LinkComponent>
 
 					<p className={styles.text}>Ткань оптом для пошива одежды</p>
 				</div>
+
 				<div className={styles.header__inner}>
 					<div className={styles.header__innerWrapper}>
 						<div className={styles.header__contentWrapper}>
+							{/* Nav */}
 							<nav className={styles.nav}>
-								<LinkComponent
-									href="tel:+790169000907"
-									type="tel"
-								>
-									<Image
-										src={phoneIcon}
-										alt="call"
-										className={[
-											styles.call_icon,
-											styles.header__icon,
-										].join(" ")}
-									/>
-								</LinkComponent>
+								{/* Phone number link */}
+								{primaryPhone ? (
+									<LinkComponent
+										href={`tel:${primaryPhone?.number}`}
+										type="tel"
+									>
+										<Image
+											src={phoneIcon}
+											alt="call"
+											className={[
+												styles.call_icon,
+												styles.header__icon,
+											].join(" ")}
+										/>
+									</LinkComponent>
+								) : (
+									<></>
+								)}
+
+								{/* Menu */}
 								{menu__info && menu__fabricCatalog ? (
 									<div className={styles.menuBtns__wrapper}>
 										<div
@@ -210,26 +251,33 @@ export default function SiteHeader({
 										</div>
 									</div>
 								) : (
-									<button onClick={() => returnBack()} className={styles.returnBack__btn}>
-                                        Вернуться на главную
-                                    </button>
+									<button
+										onClick={() => returnBack()}
+										className={styles.returnBack__btn}
+									>
+										Вернуться на главную
+									</button>
 								)}
 
+								{/* Phone number */}
 								<LinkComponent
-									href="tel:+790169000907"
+									href={`tel:${primaryPhone?.number}`}
 									type="tel"
-                                    white
+									white
 								>
-									+790169000907
+									{primaryPhone?.display}
 								</LinkComponent>
 							</nav>
 
+							{/* Logo */}
 							<div className={styles.logo_wrapper}>
-								<Image
-									src={Logo}
-									alt="Polotnotex"
-									className={styles.logo}
-								/>
+								<Link href="/">
+									<Image
+										src={Logo}
+										alt="Polotnotex"
+										className={styles.logo}
+									/>
+								</Link>
 							</div>
 
 							<div className={styles.text__wrapper}>
@@ -240,10 +288,8 @@ export default function SiteHeader({
 								</p>
 
 								<div className={styles.socials_wrapper}>
-									<LinkComponent
-										href="https://wa.me/790169000907"
-                                        
-									>
+									{/* Whatsapp link */}
+									<LinkComponent href={link_wa?.url}>
 										<Image
 											src={icon_wa}
 											alt="What's app"
@@ -254,9 +300,8 @@ export default function SiteHeader({
 										/>
 									</LinkComponent>
 
-									<LinkComponent
-										href="https://t.me/tekstilnoyepolotno"
-									>
+									{/* Telegram link */}
+									<LinkComponent href={link_tg?.url}>
 										<Image
 											src={icon_tg}
 											alt="Telegram"
@@ -267,13 +312,14 @@ export default function SiteHeader({
 										/>
 									</LinkComponent>
 
+									{/* Popup button */}
 									<button
 										className={styles.social_link}
 										onClick={() => setPopup(true)}
 									>
 										<Image
 											src={icon_mail}
-											alt="Email"
+											alt=""
 											className={[
 												styles.social_icon,
 												styles.header__icon,
@@ -284,10 +330,10 @@ export default function SiteHeader({
 							</div>
 						</div>
 
+						{/* Mobile icons container */}
 						<div className={styles.mob__iconsContainer}>
-							<LinkComponent
-								href="https://t.me/tekstilnoyepolotno"
-							>
+							{/* Telegram link */}
+							<LinkComponent href={link_tg?.url}>
 								<Image
 									src={icon_tg}
 									alt="Telegram"
@@ -298,9 +344,8 @@ export default function SiteHeader({
 								/>
 							</LinkComponent>
 
-							<LinkComponent
-								href="https://wa.me/790169000907"
-							>
+							{/* Whatsapp link */}
+							<LinkComponent href={link_wa?.url}>
 								<Image
 									src={icon_wa}
 									alt="What's app"
@@ -311,13 +356,14 @@ export default function SiteHeader({
 								/>
 							</LinkComponent>
 
+							{/* Popup button */}
 							<button
 								className={styles.social_link}
 								onClick={() => setPopup(true)}
 							>
 								<Image
 									src={icon_mail}
-									alt="Email"
+									alt=""
 									className={[
 										styles.social_icon,
 										styles.header__icon,
@@ -325,8 +371,9 @@ export default function SiteHeader({
 								/>
 							</button>
 
+							{/* Phone number link */}
 							<LinkComponent
-								href="tel:+790169000907"
+								href={`tel:${primaryPhone?.number}`}
 								type="tel"
 								className={styles.call_btn}
 							>

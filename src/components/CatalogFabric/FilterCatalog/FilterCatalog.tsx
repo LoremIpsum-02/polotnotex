@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import Popup from "@/components/UI/popup/Popup";
 import OrderSample from "@/components/OrderSample/OrderSample";
 import LinkComponent from "@/components/UI/link/LinkComponent";
+import { usePhoneNumber } from "@/hooks/usePhoneNumber";
+import { useSocialLink } from "@/hooks/useSocialLink";
 
 interface FilterOption {
 	name: string;
@@ -28,7 +30,6 @@ interface Props {
 	availabilityOptions: string[];
 	subtypes: string[];
 }
-
 export default function FilterCatalog({
 	filterValue,
 	filterOptions,
@@ -37,6 +38,12 @@ export default function FilterCatalog({
 	subtypes,
 }: Props) {
     const [popup, setPopup] = useState<boolean>(false)
+
+	// Contacts
+	const primaryPhone = usePhoneNumber("primary")
+	const link_tg = useSocialLink("telegram")
+	const link_wa = useSocialLink("whatsapp")
+
 
 	return (
 		<>
@@ -126,17 +133,20 @@ export default function FilterCatalog({
 						</div>
 					</div>
 
+					{/* Contacts */}
 					<div className={styles.contacts__wrapper}>
+						{/* Phone number */}
 						<LinkComponent
-							href="tel:+790169000907"
+							href={`tel:${primaryPhone?.number}`}
 							type="tel"
 							className={styles.phoneNumber}
                             white
 						>
-							+790169000907
+							{primaryPhone?.display}
 						</LinkComponent>
 
-						<LinkComponent href="https://wa.me/790169000907" className={styles.social_link}>
+						{/* Link what's app */}
+						<LinkComponent href={link_wa?.url} className={styles.social_link}>
 							<Image
 								src={icon_wa}
 								alt="What's app"
@@ -144,7 +154,8 @@ export default function FilterCatalog({
 							/>
 						</LinkComponent>
 
-						<LinkComponent href="https://t.me/tekstilnoyepolotno" className={styles.social_link}>
+						{/* Link telegram */}
+						<LinkComponent href={link_tg?.url} className={styles.social_link}>
 							<Image
 								src={icon_tg}
 								alt="Telegram"
@@ -152,10 +163,11 @@ export default function FilterCatalog({
 							/>
 						</LinkComponent>
 
+						{/* Popup button */}
 						<button onClick={() => setPopup(true)} className={styles.social_link}>
 							<Image
 								src={icon_mail}
-								alt="Email"
+								alt=""
 								className={styles.social_icon}
 							/>
 						</button>

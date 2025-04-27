@@ -10,6 +10,8 @@ import CatalogItem from "./CatalogItem/CatalogItem";
 import FabricCard from "../FabricCard/FabricCard";
 import Popup from "../UI/popup/Popup";
 import OrderSample from "../OrderSample/OrderSample";
+import { useSocialLink } from "@/hooks/useSocialLink";
+import { usePhoneNumber } from "@/hooks/usePhoneNumber";
 
 interface FilterOption {
 	type: string;

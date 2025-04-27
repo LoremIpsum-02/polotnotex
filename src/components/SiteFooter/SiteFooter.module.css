@@ -74,6 +74,10 @@
     align-items: flex-start;
     gap: 10px;
 }
+.phoneNumbers__wrapper *{
+	color: blue;
+	text-decoration: underline;
+}
 
 .picture{
     height: auto;

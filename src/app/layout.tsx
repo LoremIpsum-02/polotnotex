@@ -5,6 +5,8 @@ import Script from "next/script";
 import { fetchSEOData } from "@/lib/fetchSEOData";
 import { Suspense } from "react";
 import YandexMetrika from "@/components/YandexMetrika/YandexMetrika";
+import { fetchContactInfo } from "@/lib/contacts-api";
+import { ContactProvider } from "@/context/ContactsContext";
 
 export async function generateMetadata() {
 	const metadata = await fetchSEOData("home");
@@ -35,11 +37,13 @@ const involve = localFont({
 
 const analyticsEnabled = !!(process.env.NODE_ENV === "production");
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const contactInfo = await fetchContactInfo();
+
 	return (
 		<>
 			<html
@@ -65,11 +69,18 @@ export default function RootLayout({
 						}}
 					/>
 
-					<meta name="yandex-verification" content="825d8321fb9234bd" />
+					<meta
+						name="yandex-verification"
+						content="825d8321fb9234bd"
+					/>
 				</head>
 				<body>
 					<div className="mainContainer">
-						<main className="main">{children}</main>
+						<main className="main">
+							<ContactProvider value={contactInfo}>
+								{children}
+							</ContactProvider>
+						</main>
 					</div>
 					<YandexMetrika />
 				</body>

@@ -13,7 +13,6 @@ export default function TrackPageView() {
 		const url =
 			pathname +
 			(searchParams.toString() ? `?${searchParams.toString()}` : "");
-
 		const counterId = Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID);
 
 		window.ym(counterId, "hit", url);

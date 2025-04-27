@@ -9,8 +9,11 @@ import pic1 from "@/assets/media/help-block/slides/slide1/pic1.png";
 import pic2 from "@/assets/media/help-block/slides/slide1/pic2.png";
 import pic3 from "@/assets/media/help-block/slides/slide1/pic3.png";
 import LinkComponent from "@/components/UI/link/LinkComponent";
+import { useSocialLink } from "@/hooks/useSocialLink";
 
 export default function Slide1() {
+	const link_tg = useSocialLink("telegram")
+
 	return (
 		<>
 			<div className={styles.slide__container}>
@@ -45,11 +48,11 @@ export default function Slide1() {
 								className={styles.addressIcon}
 							/>
 							<p className={styles.address__text}>
-								Адрес: г. Шуя, ул. Оптовых продаж 35
+								Адрес: г. Иваново «Текстиль Профи»
 							</p>
 						</div>
 
-						<LinkComponent href="https://t.me/tekstilnoyepolotno">
+						<LinkComponent href={link_tg?.url}>
 							<button className={styles.tg__btn}>
 								Telegram-kanal
 								<Image

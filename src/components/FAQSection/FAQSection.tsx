@@ -13,6 +13,7 @@ import { RefObject, useState } from "react";
 import SpoilerItem from "./SpoilerItem/SpoilerItem";
 import { useRouter } from "next/navigation";
 import LinkComponent from "../UI/link/LinkComponent";
+import { useSocialLink } from "@/hooks/useSocialLink";
 
 interface Props {
 	targetRef: RefObject<HTMLDivElement>;
@@ -84,6 +85,10 @@ export default function FAQSection({ targetRef }: Props) {
 	});
 
 	const router = useRouter();
+
+	// Contacts
+	const link_wa = useSocialLink("whatsapp")
+	const link_tg = useSocialLink("telegram")
 
 	async function sendForm() {
 		const response = await fetch("/api/proxy", {
@@ -160,6 +165,7 @@ export default function FAQSection({ targetRef }: Props) {
 									})
 								}
 							/>
+
 							<SiteInput
 								var2
 								placeholder="Эл. почта"
@@ -172,6 +178,7 @@ export default function FAQSection({ targetRef }: Props) {
 									})
 								}
 							/>
+
 							<textarea
 								className={styles.messageInput}
 								placeholder="Опишите свой заказ"
@@ -183,7 +190,9 @@ export default function FAQSection({ targetRef }: Props) {
 									})
 								}
 							/>
+
 							<SiteBtn>ОСТАВИТЬ ЗАЯВКУ</SiteBtn>
+							
 							<FormPolicyAgreement />
 						</form>
 
@@ -193,7 +202,7 @@ export default function FAQSection({ targetRef }: Props) {
 							</p>
 
 							<div className={styles.btns__wrapper}>
-								<LinkComponent href="https://wa.me/790169000907" className={styles.socialBtn}>
+								<LinkComponent href={link_tg?.url} className={styles.socialBtn}>
 									<button className={styles.socialBtn}>
 									    WhatsApp-chat
     									<Image
@@ -204,7 +213,7 @@ export default function FAQSection({ targetRef }: Props) {
 									</button>
 								</LinkComponent>
 
-								<LinkComponent href="https://t.me/tekstilnoyepolotno">
+								<LinkComponent href={link_wa?.url}>
 									<button className={styles.socialBtn}>
 									    Telegram-kanal
     									<Image

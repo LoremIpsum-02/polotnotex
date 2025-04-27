@@ -1,3 +1,5 @@
+// lib/fetchSEOData.ts
+
 export async function fetchSEOData(slug: string) {
 	try {
 		const res = await fetch(

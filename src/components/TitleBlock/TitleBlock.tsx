@@ -12,6 +12,7 @@ import FormPolicyAgreement from "../UI/FormPolicyAgreement/FormPolicyAgreement";
 import { useRouter } from "next/navigation";
 import sendForm from "@/hooks/sendForm";
 import LinkComponent from "../UI/link/LinkComponent";
+import { useSocialLink } from "@/hooks/useSocialLink";
 
 export default function TitleBlock() {
 	const advantages = [
@@ -34,6 +35,9 @@ export default function TitleBlock() {
 	    localStorage.setItem('thankReason', 'form')
 	    router.push('/thank-you')
 	}
+
+	// Links
+	const link_tg = useSocialLink("telegram")
 
 	return (
 		<div className={styles.titleBlock}>
@@ -65,13 +69,15 @@ export default function TitleBlock() {
 							className={styles.addressIcon}
 						/>
 						<p className={styles.address_text}>
-							Адрес: г. Шуя, ул. Оптовых продаж 35
+							Адрес: г. Иваново «Текстиль Профи»
 						</p>
 					</div>
 
 					<a
-						href="https://t.me/tekstilnoyepolotno"
+						href={link_tg?.url}
 						className={styles.linkBtn}
+						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Telegram-kanal
 						<Image
@@ -161,17 +167,19 @@ export default function TitleBlock() {
 							</p>
 						</div>
 
-						<LinkComponent
-							href="https://t.me/tekstilnoyepolotno"
-							className={styles.linkBtn}
-						>
-							Telegram-kanal
-							<Image
-								src={icon_tg}
-								alt="Telegram-kanal"
-								className={styles.btn_icon}
-							/>
-						</LinkComponent>
+						<a
+						href={link_tg?.url}
+						className={styles.linkBtn}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Telegram-kanal
+						<Image
+							src={icon_tg}
+							alt="Telegram-kanal"
+							className={styles.btn_icon}
+						/>
+					</a>
 					</div>
 				</div>
 			</div>

@@ -150,7 +150,7 @@
 			calc(60px + (70 - 60) * ((100vw - 390px) / (1440 - 390))),
 			70px
 		);
-	gap: 40px;
+	gap: 20px;
 
 	position: relative;
 }
@@ -211,10 +211,22 @@
         align-items: center;
         width: 100%;
         padding: 0 15px;
+		gap: 10px;
     }
 
     .point{
         white-space: wrap;
+    }
+}
+
+@media (max-width: 550px) {
+    .contacts{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .linkBtn{
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -225,13 +237,5 @@
 
     .info__wrapper{
         gap: 20px;
-    }
-    .contacts{
-        flex-direction: column;
-        gap: 20px;
-    }
-    .linkBtn{
-        width: 100%;
-        justify-content: center;
     }
 }
