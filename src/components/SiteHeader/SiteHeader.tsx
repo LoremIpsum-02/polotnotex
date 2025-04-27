@@ -33,15 +33,10 @@ interface Props {
 	selectFabric?: (arg: {
 		type: string;
 		subtypes: string[];
-		availability: any[];
+		availability: any;
 	}) => void;
 	productsRef?: RefObject<HTMLDivElement>;
 	menu__info?: MenuInfoItem[];
-}
-
-interface SocialLink {
-	name: string;
-	url: string;
 }
 
 export default function SiteHeader({

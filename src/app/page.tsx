@@ -22,7 +22,7 @@ import { usePathname } from "next/navigation";
 export default function Home() {
 	const pathname = usePathname();
 
-	const [preselectedFilter, setPreselectedFilter] = useState({
+	const [preselectedFilter, setPreselectedFilter] = useState<any>({
 		type: "all",
 		subtypes: [],
 		availability: [],
