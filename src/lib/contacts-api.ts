@@ -24,9 +24,15 @@ export async function fetchPhoneNumbers(): Promise<PhoneNumber[]> {
 	}
 
 	try {
-		const res = await fetch(
-			`${process.env.NEXT_PUBLIC_WC_API_URL}/custom-api/v1/phone-numbers`
-		);
+		let url = "/api/phoneNumbers";
+
+		if (typeof window === "undefined") {
+			const baseUrl =
+				process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+			url = `${baseUrl}/api/phoneNumbers`;
+		}
+
+		const res = await fetch(url);
 
 		if (!res.ok) {
 			throw new Error(
@@ -40,7 +46,7 @@ export async function fetchPhoneNumbers(): Promise<PhoneNumber[]> {
 
 		return phoneNumbersCache;
 	} catch (error) {
-		console.error("❌ Error fetching phone numbers:", error);
+		console.error("Error fetching phone numbers:", error);
 		return [];
 	}
 }
