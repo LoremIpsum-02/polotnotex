@@ -9,7 +9,7 @@ import { useSocialLink } from "@/hooks/useSocialLink";
 export default function PartnershipBlock() {
 	const pointsList = [
 		"МАСШТАБЫ И СКОРОСТЬ ОТГРУЗОК ТКАНИ",
-		"ПРЯМАМЯ ПОКУПКА ТКАНИ И БРОНИРОВАНИЕ",
+		"ПРЯМАЯ ПОКУПКА ТКАНИ И БРОНИРОВАНИЕ",
 		"ФОТО И ВИДЕО ОБЗОРЫ НА ПОСТАВЛЯЕМУЮ ТКАНЬ",
 	];
 

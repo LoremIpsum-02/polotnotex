@@ -25,7 +25,7 @@ export default function HelpBlock({ currentSlide, targetRef, setCurrentSlide }: 
 			component: <Slide1 />,
 		},
 		{
-			sliderBtn: "Купить ткани по оптовым ценам ",
+			sliderBtn: "Купить ткани по оптовым ценам",
 			component: <Slide2 />,
 		},
 		{
